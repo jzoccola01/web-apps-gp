@@ -3,17 +3,34 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Recipe Roster</title>
-        <link rel="stylesheet"
-              href="{{ url_for('static', filename='cooking.css') }}">
+        <link rel="stylesheet" href="../static/base.css">
     </head>
     <body>
-        <header>
-            <h1>Recipe Roster</h1>
-            <a href="{{ url_for('main.index') }}">Home</a>
+        <header> <!-- Horizontally place the logo, then a searchbar, then a mini user bio tab with a dropdown menu -->
+            <a href="base.html">
+                <img class="header_logo" src="../static/header_logo.png" alt="logo" width="250px">
+            </a>
+            <div class="searchbar_form">
+                <form action="" id="searchform">
+                    <input class="searchbar" type="text" placeholder="Recipes, Ingredients, and More...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="header_user">
+                <img class="header_user_avatar" src="../static/header_user_avatar.png" alt="avatar" width="50px">
+                <div class="header_user_dropdown">
+                    <button class="header_user_dropdown_button">Username</button>
+                    <div class="header_user_dropdown_content">
+                        <a href="profile.html">Profile</a>
+                        <a href="settings.html">Settings</a>
+                        <a href="logout.html">Logout</a>
+                    </div>
+                </div>
+            </div>
         </header>
         <section class="content">
-            {% block content %}{% endblock %}
+            <!-- {% block content %}{% endblock %} -->
         </section>
-        <footer><small>Developed for Web applications</small></footer>
+        <footer><small>Developed for Web Applications course at UC3M</small></footer>
     </body>
 </html>
