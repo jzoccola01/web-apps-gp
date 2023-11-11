@@ -1,23 +1,31 @@
 :root {
     --primary: #FF824A;
     --secondary: #000000;
+    --primary-variant: #FFA07A;
+    --secondary-variant: #696969;
+    --background: #FFFFFF;
+    --dark-text: #000000;
+    --light-text: #FFFFFF;
+    --background-overlay: #f1f1f1;
+    --background-overlay-variant: #ddd;
+    --shadow-color: rgba(0,0,0,0.2);
     --white: #FFFFFF;
     --black: #000000;
 }
 
 body {
-    background-color: var(--white);
+    background-color: var(--background);
 }
 
 header {
     display: flex;
     flex-direction: row;
     padding: 0.5px;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--black);
+    background-color: var(--background);
+    border-bottom: 1px solid var(--secondary);
 }
 
-#header_logo {
+#header-logo {
     margin-left: 50px;
 }
 
@@ -29,7 +37,7 @@ header {
     font-size: 20px;
 }
 
-#searchbar_form {
+#searchbar-form {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -44,14 +52,6 @@ header {
     gap: 5px;
 }
 
-#header_user {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 50px;
-}
-
 .input:focus {
     border-color: var(--primary);
     outline: none;
@@ -60,7 +60,7 @@ header {
 .button {
     background-color: var(--primary);
     border: none;
-    color: var(--white);
+    color: var(--light-text);
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
@@ -71,5 +71,45 @@ header {
 }
 
 .button:hover {
-    background-color: #FFA07A;
+    background-color: var(--primary-variant);
 }
+
+#header-user {
+    position: relative;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 150px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#user-dropdown-button {
+    position: absolute;
+    bottom: 15px;
+    width: 100px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--background-overlay);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px var(--shadow-color);
+    top: 50px;
+    left: -10px;
+    border-radius: 10px;
+}
+
+.dropdown-content a {
+    color: var(--secondary);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: var(--background-overlay-variant); border-radius: 10px;}
+
+.show {display:block;}

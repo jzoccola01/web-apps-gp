@@ -4,29 +4,27 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Recipe Roster</title>
         <link rel="stylesheet" href="../static/base.css">
+        <script type="text/javascript" src="../scripts/dropdown.js"></script>
     </head>
     <body>
         <header> <!-- Horizontally place the logo, then a searchbar, then a mini user bio tab with a dropdown menu -->
             <a href="base.html">
-                <img id="header_logo" src="../static/header_logo.png" alt="logo" width="250px">
+                <img id="header-logo" src="../static/header_logo.png" alt="logo" width="250px">
             </a>
 
-            <div id="searchbar_form">
+            <div id="searchbar-form">
                 <form action="" id="searchform">
                     <input id="searchbar" class="input" type="text" placeholder="Recipes, Ingredients, and More...">
                     <button class="button" type="submit">Search!</button>
                 </form>
             </div>
 
-            <div id="header_user">
-                <img id="header_user_avatar" src="../static/header_user_avatar.png" alt="avatar" width="50px">
-                <div id="header_user_dropdown">
-                    <button id="header_user_dropdown_button">Username</button>
-                    <div id="header_user_dropdown_content">
-                        <a href="profile.html">Profile</a>
-                        <a href="settings.html">Settings</a>
-                        <a href="logout.html">Logout</a>
-                    </div>
+            <div id="header-user" class="dropdown">
+                <button onclick="func()" class="dropbutton button" id="user-dropdown-button">Log In</button>
+                <div id="user-dropdown" class="dropdown-content">
+                    <a href="">Log In / Log Out</a>
+                    <a href="">Create Account</a>
+                    <a href="./main/profile.html">My Profile</a>
                 </div>
             </div>
 
