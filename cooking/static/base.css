@@ -1,20 +1,35 @@
+:root {
+    --primary: #FF824A;
+    --secondary: #000000;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--white);
 }
 
 header {
     display: flex;
     flex-direction: row;
     padding: 0.5px;
-    background-color: rgb(255, 255, 255);
-    border-bottom: 1px solid rgb(0, 0, 0);
+    background-color: var(--white);
+    border-bottom: 1px solid var(--black);
 }
 
-.searchbar {
-    width: 250px
+#header_logo {
+    margin-left: 50px;
 }
 
-.searchbar_form { /* Elements should be on the bottom of the div */
+#searchbar {
+    width: 500px;
+    border-radius: 25px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+#searchbar_form {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -22,15 +37,39 @@ header {
 
 #searchform {
     position: absolute;
-    bottom: 35px;
+    bottom: 15px;
+    margin-left: 50px;
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.header_user {
+#header_user {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-left: auto;
+    margin-right: 50px;
+}
+
+.input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.button {
+    background-color: var(--primary);
+    border: none;
+    color: var(--white);
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+.button:hover {
+    background-color: #FFA07A;
 }

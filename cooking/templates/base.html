@@ -8,25 +8,28 @@
     <body>
         <header> <!-- Horizontally place the logo, then a searchbar, then a mini user bio tab with a dropdown menu -->
             <a href="base.html">
-                <img class="header_logo" src="../static/header_logo.png" alt="logo" width="250px">
+                <img id="header_logo" src="../static/header_logo.png" alt="logo" width="250px">
             </a>
-            <div class="searchbar_form">
+
+            <div id="searchbar_form">
                 <form action="" id="searchform">
-                    <input class="searchbar" type="text" placeholder="Recipes, Ingredients, and More...">
-                    <button type="submit">Search</button>
+                    <input id="searchbar" class="input" type="text" placeholder="Recipes, Ingredients, and More...">
+                    <button class="button" type="submit">Search!</button>
                 </form>
             </div>
-            <div class="header_user">
-                <img class="header_user_avatar" src="../static/header_user_avatar.png" alt="avatar" width="50px">
-                <div class="header_user_dropdown">
-                    <button class="header_user_dropdown_button">Username</button>
-                    <div class="header_user_dropdown_content">
+
+            <div id="header_user">
+                <img id="header_user_avatar" src="../static/header_user_avatar.png" alt="avatar" width="50px">
+                <div id="header_user_dropdown">
+                    <button id="header_user_dropdown_button">Username</button>
+                    <div id="header_user_dropdown_content">
                         <a href="profile.html">Profile</a>
                         <a href="settings.html">Settings</a>
                         <a href="logout.html">Logout</a>
                     </div>
                 </div>
             </div>
+
         </header>
         <section class="content">
             <!-- {% block content %}{% endblock %} -->
