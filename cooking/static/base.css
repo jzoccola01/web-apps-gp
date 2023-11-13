@@ -22,7 +22,9 @@ header {
     flex-direction: row;
     padding: 0.5px;
     background-color: var(--background);
-    border-bottom: 1px solid var(--secondary);
+    border: 3px solid var(--secondary);
+    position: sticky;
+    width: 100%;
 }
 
 footer {
@@ -32,6 +34,8 @@ footer {
 
 #header-logo {
     margin-left: 50px;
+    /* max-width: 100%;
+    height: auto; */
 }
 
 #searchbar {
@@ -40,21 +44,21 @@ footer {
     height: 30px;
     padding-left: 10px;
     font-size: 20px;
+    border: 3px solid green;
 }
 
 #searchbar-form {
-    position: relative;
-    display: flex;
-    flex-direction: row;
+    border: 3px solid red;
+    margin-left: 50px;
 }
 
 #searchform {
-    position: absolute;
-    bottom: 15px;
-    margin-left: 50px;
     display: flex;
     flex-direction: row;
     gap: 5px;
+    border: 3px solid orange;
+    position: relative;
+    top: 55px;
 }
 
 .input:focus {
@@ -80,10 +84,10 @@ footer {
 }
 
 #header-user {
-    position: relative;
     align-items: center;
-    margin-left: auto;
-    margin-right: 150px;
+    border: 3px solid blue;
+    position: relative;
+    left: 300px;
 }
 
 .dropdown {
@@ -92,9 +96,10 @@ footer {
 }
 
 #user-dropdown-button {
-    position: absolute;
-    bottom: 15px;
     width: 100px;
+    border: 3px solid purple;
+    position:relative;
+    top: 55px;
 }
 
 .dropdown-content {
@@ -104,7 +109,7 @@ footer {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px var(--shadow-color);
     top: 50px;
-    left: -10px;
+    left: -15px;
     border-radius: 10px;
     z-index: 3;
 }
