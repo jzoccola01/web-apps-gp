@@ -1,61 +1,72 @@
-# from . import db
+from . import db
 
-# class User(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.String(128), unique=True, nullable=False)
-#     username = db.Column(db.String(64), nullable=False)
-#     password = db.Column(db.String(100), nullable=False)
-#     salt = db.Column(db.Integer, nullable=False)
-#     recipes = db.relationship('Recipe', back_populates='user')
-#     photos = db.relationship('Photo', back_populates='user')
-#     bookmarked_recipes = db.relationship('Recipe', back_populates='user')
-#     timestamp = db.Column(db.DateTime, nullable=False)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(128), unique=True, nullable=False)
+    username = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    salt = db.Column(db.Integer, nullable=False)
+    recipes = db.relationship('Recipe', back_populates='user')
+    photos = db.relationship('Photo', back_populates='user')
+    bookmarks = db.relationship('Bookmark', back_populates='user')
+    timestamp = db.Column(db.DateTime, nullable=False)
+    ratings = db.relationship('Rating', back_populates='user')
 
-# class Recipe(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(64), nullable=False)
-#     description = db.Column(db.String(256), nullable=False)
-#     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#     creator = db.relationship('User', back_populates='recipes')
-#     servings = db.Column(db.Integer, nullable=False)
-#     cook_time = db.Column(db.Integer, nullable=False)
-#     quantified_ingredients = db.relationship('QuantifiedIngredient', back_populates='recipe')
-#     steps = db.relationship('Step', back_populates='recipe')
+class Bookmark(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    user = db.relationship('User', back_populates='bookmarks')
+    recipe = db.relationship('Recipe', back_populates='bookmarks')
 
-# class Ingredient(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(64), nullable=False)
-#     quantified_ingredient = db.relationship('QuantifiedIngredient', back_populates='ingredient')
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    creator = db.relationship('User', back_populates='recipes')
+    servings = db.Column(db.Integer, nullable=False)
+    cook_time = db.Column(db.Integer, nullable=False)
+    quantified_ingredients = db.relationship('QuantifiedIngredient', back_populates='recipe')
+    steps = db.relationship('Step', back_populates='recipe')
+    ratings = db.relationship('Rating', back_populates='recipe')
+    bookmarks = db.relationship('Bookmark', back_populates='recipe')
+    photos = db.relationship('Photo', back_populates='recipe')
 
-# class QuantifiedIngredient(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     quantity = db.Column(db.Integer, nullable=False)
-#     unit = db.Column(db.String(64), nullable=False)
-#     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.id'), nullable=False)
-#     ingredient = db.relationship('Ingredient', back_populates='quantified_ingredient')
-#     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
-#     recipe = db.relationship('Recipe', back_populates='quantified_ingredients')
+class Ingredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), nullable=False)
+    quantified_ingredients = db.relationship('QuantifiedIngredient', back_populates='ingredient')
 
-# class Step(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     seq_number = db.Column(db.Integer, nullable=False)
-#     description = db.Column(db.String(256), nullable=False)
-#     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
-#     recipe = db.relationship('Recipe', back_populates='steps')
+class QuantifiedIngredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Float, nullable=False)
+    unit = db.Column(db.String(64), nullable=False)
+    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.id'), nullable=False)
+    ingredient = db.relationship('Ingredient', back_populates='quantified_ingredients')
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='quantified_ingredients')
 
-# class Rating(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     rating = db.Column(db.Integer, nullable=False)
-#     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
-#     recipe = db.relationship('Recipe', back_populates='ratings')
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#     user = db.relationship('User', back_populates='ratings')
-#     comment = db.Column(db.String(256), nullable=True)
+class Step(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    seq_number = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='steps')
 
-# class Photo(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     file_extension = db.Column(db.String(8), nullable=False)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#     user = db.relationship('User', back_populates='photos')
-#     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
-#     recipe = db.relationship('Recipe', back_populates='photos')
+class Rating(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Integer, nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='ratings')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', back_populates='ratings')
+    comment = db.Column(db.Text, nullable=True)
+
+class Photo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    file_extension = db.Column(db.String(8), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', back_populates='photos')
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='photos')
