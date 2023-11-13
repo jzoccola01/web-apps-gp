@@ -1,4 +1,6 @@
-#!/Users/AlecMorrison/Desktop/cooking-app/venv/bin/python3
+#!/bin/sh
+'''exec' "/Users/Uri_K/Desktop/UCB/Study Abroad/Web Apps/web-apps-gp/venv/bin/python3.11" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
