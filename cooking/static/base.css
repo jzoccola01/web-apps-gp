@@ -22,7 +22,7 @@ header {
     flex-direction: row;
     padding: 0.5px;
     background-color: var(--background);
-    border: 3px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
     position: sticky;
     width: 100%;
 }
@@ -44,11 +44,11 @@ footer {
     height: 30px;
     padding-left: 10px;
     font-size: 20px;
-    border: 3px solid green;
+    /* border: 3px solid green; */
 }
 
 #searchbar-form {
-    border: 3px solid red;
+    /* border: 3px solid red; */
     margin-left: 50px;
 }
 
@@ -56,7 +56,7 @@ footer {
     display: flex;
     flex-direction: row;
     gap: 5px;
-    border: 3px solid orange;
+    /* border: 3px solid orange; */
     position: relative;
     top: 55px;
 }
@@ -85,7 +85,7 @@ footer {
 
 #header-user {
     align-items: center;
-    border: 3px solid blue;
+    /* border: 3px solid blue; */
     position: relative;
     left: 300px;
 }
@@ -97,7 +97,7 @@ footer {
 
 #user-dropdown-button {
     width: 100px;
-    border: 3px solid purple;
+    /* border: 3px solid purple; */
     position:relative;
     top: 55px;
 }
