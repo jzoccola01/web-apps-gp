@@ -5,7 +5,7 @@
         <title>Recipe Roster</title>
         <link rel="stylesheet" href="../static/base.css">
         <script type="text/javascript" src="{{ url_for('static', filename='dropdown.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='login_overlay.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='overlay.js') }}"></script>
     </head>
     <body>
         <header> <!-- Horizontally place the logo, then a searchbar, then a mini user bio tab with a dropdown menu -->
@@ -25,7 +25,7 @@
                 <div id="user-dropdown" class="dropdown-content">
                     <!-- Display Login if logged out and vice versa -->
                     <a onclick="loginOverlayOn()">Log In / Log Out</a> 
-                    <a onclick="">Create Account</a>
+                    <a onclick="signUpOverlayOn()">Create Account</a>
                     <a href="{{ url_for('main.profile') }}">My Profile</a>
                 </div>
             </div>
@@ -37,8 +37,35 @@
                 <form id="login-form" action="" method="post">
                     <div id="login-form-header">
                         <h1>Log In</h1>
+                        <button id = "close" class="button" onclick="loginOverlayOff()">
+                            Close
+                        </button>
                     </div>
                     <div id="login-form-content">
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+                        <!-- <label for="username"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="username" required> -->
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <button type="submit" class="button">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="signup-overlay" class="overlay">
+            <div class="overlay-content">
+                <form id="signup-form" action="" method="post">
+                    <div id="signup-form-header">
+                        <h1>Sign Up</h1>
+                        <button id = "close" class="button" onclick="signUpOverlayOff()">
+                            Close
+                        </button>
+                    </div>
+                    <div id="signup-form-content">
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" required>
                         <label for="username"><b>Username</b></label>
                         <input type="text" placeholder="Enter Username" name="username" required>
                         <label for="password"><b>Password</b></label>
