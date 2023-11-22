@@ -1,6 +1,7 @@
 from . import db
+import flask_login
 
-class User(db.Model):
+class User(flask_login.UserMixin, db.Model,):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(128), unique=True, nullable=False)
     username = db.Column(db.String(64), nullable=False)
@@ -23,8 +24,8 @@ class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    creator = db.relationship('User', back_populates='recipes')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', back_populates='recipes')
     servings = db.Column(db.Integer, nullable=False)
     cook_time = db.Column(db.Integer, nullable=False)
     quantified_ingredients = db.relationship('QuantifiedIngredient', back_populates='recipe')

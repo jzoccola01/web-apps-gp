@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
-
-    </section>
+    {% if current_user.is_authenticated: %}
+        <div>User: {{current_user.username}}</div>
+    {% endif %}
 {% endblock %}
