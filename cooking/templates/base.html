@@ -21,7 +21,11 @@
             </div>
 
             <div id="header-user" class="dropdown">
-                <button onclick="dropdownFunc()" class="dropbutton button" id="user-dropdown-button">Log In</button>
+                {% if current_user.is_authenticated: %}
+                    <button onclick="dropdownFunc()" class="dropbutton button" id="user-dropdown-button">{{ current_user.username }}</button>
+                {% else %}
+                    <button onclick="dropdownFunc()" class="dropbutton button" id="user-dropdown-button">Log In</button>
+                {% endif %}
                 <div id="user-dropdown" class="dropdown-content">
                     <!-- Display Login if logged out and vice versa -->
                     {% if current_user.is_authenticated: %}

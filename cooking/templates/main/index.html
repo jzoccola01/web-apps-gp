@@ -1,7 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if current_user.is_authenticated: %}
-        <div>User: {{current_user.username}}</div>
-    {% endif %}
+    <link rel="stylesheet" href="../../static/index.css">
+    
+    <container id="whole-page">
+        <div id="side-bar">
+            <div id="filter">
+
+            </div>
+
+            <div id="sort">
+
+            </div>
+        </div>
+
+        <div id="main-body">
+            <div id="upper-body">
+                <div id="title">
+
+                </div>
+
+                <div id="create-recipe">
+
+                </div>
+            </div>
+
+            <div id="lower-body">
+                <div id="recipe-list">
+                    <!-- Some kind of jinja template here for each small recipe view -->
+                </div>
+            </div>
+        </div>
+    </container>
+
 {% endblock %}
