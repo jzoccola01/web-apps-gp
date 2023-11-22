@@ -5,7 +5,7 @@ var shown = false;
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function func() {
+function dropdownFunc() {
     document.getElementById("user-dropdown").classList.toggle("show");
     shown = !shown;
 }
