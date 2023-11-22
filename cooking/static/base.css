@@ -25,6 +25,7 @@ header {
     border-bottom: 2px solid var(--secondary);
     position: sticky;
     width: 100%;
+    z-index : 3;
 }
 
 footer {
@@ -93,7 +94,6 @@ footer {
 .dropdown {
     position: relative;
     display: inline-block;
-    z-index: 3;
 }
 
 #user-dropdown-button {
