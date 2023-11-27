@@ -1,5 +1,22 @@
-{% extends 'index.html' %}
+<link rel="stylesheet" href="../static/index.css">
 
 <div class="recipe">
-    {{ recipe.title }}
+    <div id="recipe-wrap">
+        <div id="recipe-photo">
+            <img src="{{ recipe.photo }}" alt="recipe photo">
+        </div>
+        <div id="recipe-content">
+            <div id="recipe-title">
+                {{ recipe.title }}
+            </div>
+            <div id="recipe-description">
+                {{ recipe.description }}
+            </div>
+        </div>
+    </div>
+    <div id="bookmark-button">
+        <button class="button">
+            <img src="../static/bookmark-icon.png" alt="bookmark icon" width="20px" id="bookmark">
+        </button>
+    </div>
 </div>

@@ -24,6 +24,7 @@ header {
     background-color: var(--background);
     border-bottom: 2px solid var(--secondary);
     position: sticky;
+    top: 0px;
     width: 100%;
     z-index : 3;
 }
