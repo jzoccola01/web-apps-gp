@@ -9,7 +9,22 @@
 #side-bar {
     display: flex;
     flex-direction: column;
-    border: 3px solid red;
+    /* border: 1px solid black; */
+    padding: 10px;
+    background-color: var(--background-overlay);
+    border-radius: 10px;
+}
+
+#side-bar h2 {
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-text);
+    font-size: x-large;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#side-bar button {
+    margin-top: 10px;
 }
 
 #filter-form {
@@ -20,4 +35,74 @@
 .list-item {
     display: flex;
     flex-direction: row;
+    /* border: 3px solid green;     */
+}
+
+.list-item label {
+    font-size: large;
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-text);
+    padding: 5px;
+}
+
+input[type='radio'] {
+    accent-color: black;
+}
+
+#sort-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#filter {
+    background-color: var(--background-overlay-variant);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#sort {
+    background-color: var(--background-overlay-variant);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#main-body {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid red;
+    width: 100%;
+    padding: 10px;
+}
+
+#upper-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 3px solid blue;
+    width: 99%;
+    padding: 10px;
+}
+
+#lower-body {
+    display: flex;
+    flex-direction: row;
+    border: 3px solid green;
+    width: 99%;
+    padding: 10px;
+}
+
+#title {
+    border: 3px solid black;
+    font-size: xx-large;
+    font-family: 'Roboto', sans-serif;
+    color: var(--primary);
+}
+
+#title h1 {
+    margin: 0;
+}
+
+#create-recipe {
+    border: 3px solid black;
 }

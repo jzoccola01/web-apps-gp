@@ -6,6 +6,7 @@
     <container id="whole-page">
         <div id="side-bar">
             <div id="filter">
+                <h2>Filter</h2>
                 <form action="" id="filter-form">
                     <div class="list-item">
                         <input id="filter-cat" class="input" type="radio" id="breakfast" name="filter">
@@ -22,29 +23,49 @@
                         <label for="dinner">Dinner</label>
                     </div>
 
-                    <button class="button" type="submit">Apply Filter!</button>
+                    <button class="button" type="submit">Apply!</button>
                 </form>
             </div>
 
             <div id="sort">
+                <h2>Sort</h2>
+                <form action="" id="sort-form">
+                    <div class="list-item">
+                        <input id="filter-cat" class="input" type="radio" name="sort">
+                        <label for="rating">Highest Rating</label>
+                    </div>
+                    
+                    <div class="list-item">
+                        <input id="filter-cat" class="input" type="radio" name="sort">
+                        <label for="reviews">Most Reviewed</label>
+                    </div>
+                    
+                    <div class="list-item">
+                        <input id="filter-cat" class="input" type="radio" name="sort">
+                        <label for="dinner">Most Recent</label>
+                    </div>
 
+                    <button class="button" type="submit">Apply!</button>
+                </form>
             </div>
         </div>
 
         <div id="main-body">
             <div id="upper-body">
                 <div id="title">
-
+                    <h1>Recipes</h1>
                 </div>
 
                 <div id="create-recipe">
-
+                    <button class="button">Create Recipe</button>
                 </div>
             </div>
 
             <div id="lower-body">
                 <div id="recipe-list">
-                    <!-- Some kind of jinja template here for each small recipe view -->
+                    {% for recipe in recipes %}
+                        {% include 'recipe_preview.html' %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
