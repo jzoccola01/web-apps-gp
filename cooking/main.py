@@ -40,3 +40,7 @@ def index():
 @bp.route("/profile")
 def profile():
     return render_template("main/profile.html")
+
+@bp.route("/create")
+def create():
+    return render_template("main/create_recipe.html")

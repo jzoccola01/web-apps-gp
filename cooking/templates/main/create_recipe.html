@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <link rel="stylesheet" href="../../static/create_recipe.css">
+
+    <div id="form-div">
+        <h1>New Recipe</h1>
+        <form action="" id="recipe-form">
+            <div class="form-item">
+                <label for="recipe-name">Recipe Name</label>
+                <input class="input" type="text" id="recipe-name" name="recipe-name">
+            </div>
+
+            <div class="form-item">
+                <label for="recipe-desc">Recipe Description</label>
+                <textarea class="input" id="recipe-desc" name="recipe-desc"></textarea>
+            </div>
+
+            <div class="form-item">
+                <label for="servings">Servings</label>
+                <input class="input" type="number" id="servings" name="servings">
+            </div>
+
+            <div class="form-item">
+                <label for="cook-time">Cook Time</label>
+                <input class="input" type="number" id="cook-time" name="cook-time">
+            </div>
+
+            <b>Ingredients</b> 
+
+            <div class="form-item">
+                <span class="ingredient-quantity">
+                    <label for="ingredient-name">Ingredient Name</label>
+                    <input class="input" type="text" id="ingredient-name" name="ingredient-name">
+                </span>
+            </div>
+
+            <button class="button" type="submit">Create!</button>
+        </form>
+    </div>
+
+{% endblock %}
