@@ -1,0 +1,5 @@
+<div class="ingredients">
+    {% for ingredient in ingredients %}
+            <div class="text">{{ ingredient.quantity }} {{ ingredient.ingredient.name }}</div>   
+    {% endfor %}
+</div>

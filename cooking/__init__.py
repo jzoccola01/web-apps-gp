@@ -24,6 +24,8 @@ def create_app(test_config=None):
     # (we import main from here to avoid circular imports in the next lab)
     from . import main
     from . import auth
+    from . import profile
+    from . import recipe
 
     login_manager = LoginManager()
     login_manager.login_view = 'main.index'
@@ -36,4 +38,6 @@ def create_app(test_config=None):
 
     app.register_blueprint(main.bp)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(profile.bp)
+    app.register_blueprint(recipe.bp)
     return app

@@ -1,7 +1,143 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
+    <link rel="stylesheet" href="../static/recipeview.css">
+
+
+    <section class="container_main">
+        <div class="box1">
+            <div>
+                <span  class = "recipeh1">{{recipe.title}}</span>
+                <a href="" style="padding-left: 20px;" style="font-size: small;">Category</a>
+                <a href="" style="padding-left: 20px;" style="font-size: small;">Save</a>
+            </div>
+            <div style="padding-top: 10px;">
+                by: <a href="">{{recipe.user.username}}</a>
+            </div>
+            <div class="starsheader">
+                <span>Rating: </span>
+                <span class="starsvalue">{{rating_value}}</span>
+                <a href="#reviews">(reviews)</a>
+            </div>
+
+            <div class="description">
+                {{recipe.description}}
+            </div>
+
+            <div class="metadata">
+                <span style="padding-right: 20px;">
+                    Cook Time: {{recipe.cook_time}} mins
+                </span>
+                <span class="vl">
+                    Servings: {{recipe.servings}} 
+                </span>
+            </div>
+        </div>
+
+        <div class="box2">
+            <img class="main_img" src="static/placeholder-photo.jpeg" alt="User uploaded image of recipe">
+        </div>
+    </section>
+
+
+    <section class="container_sub">
+        <div class = "recipeh1" style="width: 100%;">
+            Ingredients
+        </div>
+
+        <div>
+            {% include 'ingredients_template.html' %}
+        </div>
+
 
     </section>
+
+    <section class="container_sub">
+        <div class = "recipeh1">
+            Steps
+        </div>
+        <div>
+            {% include 'steps_template.html' %}
+        </div>
+
+    </section>
+
+
+    <section class="container_sub">
+        <div class = "recipeh1">
+            Reviews
+        </div>
+
+        <div>
+            {% include 'ratings_template.html' %}
+        </div>
+
+
+
+        <div>
+            <form action="{{ url_for('recipe.new_rating') }}" method="post" style="padding-top: 20px;">
+                <label for="stars">Choose a rating:</label>
+                <select name="stars">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+                <!-- <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                </div> -->
+
+                
+                <div>
+                    <textarea name="text"></textarea>
+                </div>
+                <div>
+                    <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                    <input type="submit" value="Review"/>
+                </div>
+            </form>
+        </div>
+
+
+    </section>
+
+
+
+
+    <!-- 
+    STILL NEEDED:
+        upload photo button
+
+        bookmarks hidden for logged out users
+        review hidden for logged out users
+        review hidden for users who already reviewed
+
+
+    THEN STYLING
+
+
+
+    EVENTUALLY: 
+        slideshow:
+        https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp
+    
+    -->
+
+
+
+
+
+
+    <section class=""></section>
+
 {% endblock %}
