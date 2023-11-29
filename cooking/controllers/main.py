@@ -13,7 +13,7 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def index():
-    query = db.select(model.Recipe)
+    query = db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
     recipes = db.session.execute(query).scalars().all()
     return render_template("main/index.html", recipes=recipes)
 

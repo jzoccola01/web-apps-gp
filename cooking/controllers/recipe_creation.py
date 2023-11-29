@@ -33,7 +33,7 @@ def create():
 
     user_id = flask_login.current_user.id
     
-    new_recipe = model.Recipe(title=title, description=description, servings=servings, cook_time=cook_time, user_id=user_id)
+    new_recipe = model.Recipe(title=title, description=description, servings=servings, cook_time=cook_time, user_id=user_id, timestamp=datetime.datetime.now())
     db.session.add(new_recipe)
     
     uploaded_photo = request.files['photo']
