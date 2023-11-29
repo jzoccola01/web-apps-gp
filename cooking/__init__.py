@@ -25,6 +25,8 @@ def create_app(test_config=None):
     from . import main
     from . import auth
     from . import recipe_creation
+    from . import profile
+    from . import recipe
 
     login_manager = LoginManager()
     login_manager.login_view = 'main.index'
@@ -38,4 +40,6 @@ def create_app(test_config=None):
     app.register_blueprint(main.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(recipe_creation.bp)
+    app.register_blueprint(profile.bp)
+    app.register_blueprint(recipe.bp)
     return app
