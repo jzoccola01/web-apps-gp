@@ -5,6 +5,9 @@ from . import db, bcrypt
 from . import model
 import flask_login
 
+import pathlib
+from flask import current_app
+
 import datetime
 
 bp = Blueprint("recipe_creation", __name__)
@@ -32,8 +35,31 @@ def create():
     
     new_recipe = model.Recipe(title=title, description=description, servings=servings, cook_time=cook_time, user_id=user_id)
     db.session.add(new_recipe)
-    print(ingredients)
-    print("HIHIHIHIIHIIHI")
+    
+    uploaded_photo = request.files['photo']
+    if uploaded_photo.filename != '':
+        content_type = uploaded_photo.content_type
+        if content_type == "image/png":
+            file_extension = "png"
+        elif content_type == "image/jpeg":
+            file_extension = "jpg"
+        else:
+            flash("Invalid file type")
+            return redirect(url_for("main.index"))
+        
+        new_photo = model.Photo(file_extension=file_extension, user_id=user_id, recipe=new_recipe)
+        db.session.add(new_photo)
+        db.session.commit()
+
+        path = (
+            pathlib.Path(current_app.root_path)
+            / "static"
+            / "photos"
+            / f"photo-{new_photo.id}.{file_extension}"
+        )
+        uploaded_photo.save(path)
+    
+
     for i in range(ingredient_count):
         query = db.select(model.Ingredient).where(model.Ingredient.name == ingredients[i])
         ingredient = db.session.execute(query).scalar_one_or_none()

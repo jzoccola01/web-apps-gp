@@ -6,6 +6,8 @@ from flask import Blueprint, render_template
 
 from . import model
 
+from . import db
+
 import flask_login
 
 bp = Blueprint("main", __name__)
@@ -26,17 +28,8 @@ class Recipe:
 
 @bp.route("/")
 def index():
-    recipes = [Recipe("Chicken Parmesan", "A delicious chicken dish", 4, 60),
-               Recipe("Pasta Carbonara", "A delicious pasta dish", 2, 30),
-               Recipe("Steak", "A delicious steak", 1, 15),
-               Recipe("Fish", "A delicious fish", 1, 20),
-               Recipe("Burger", "A delicious burger", 1, 20),
-               Recipe("Pizza", "A delicious pizza", 1, 20),
-               Recipe("Chicken", "A delicious chicken", 1, 20),
-               Recipe("Pasta", "A delicious pasta", 1, 20),
-               Recipe("Salad", "A delicious salad", 1, 20),
-               Recipe("Soup", "A delicious soup", 1, 20),
-               Recipe("Sandwich", "A delicious sandwich", 1, 20)]
+    query = db.select(model.Recipe)
+    recipes = db.session.execute(query).scalars().all()
     return render_template("main/index.html", recipes=recipes)
 
 @bp.route("/profile")

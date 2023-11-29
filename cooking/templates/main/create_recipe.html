@@ -5,7 +5,7 @@
 
     <div id="form-div">
         <h1>New Recipe</h1>
-        <form action="{{ url_for('recipe_creation.create') }}" id="recipe-form" method="post">
+        <form action="{{ url_for('recipe_creation.create') }}" id="recipe-form" method="post" enctype="multipart/form-data">
             <div class="form-item">
                 <label for="recipe-name">Recipe Name</label>
                 <input class="input" type="text" id="recipe-name" name="recipe-name">
@@ -73,6 +73,11 @@
             
             <br>
             <br>
+
+            <div class="form-item">
+                <label for="recipe-image">Upload Photo</label>
+                <input type="file" name="photo" accept="image/jpeg,image/png" id="recipe-image">
+            </div>
 
             <button class="button" type="submit">Create!</button>
         </form>

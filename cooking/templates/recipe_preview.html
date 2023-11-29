@@ -3,7 +3,11 @@
 <div class="recipe">
     <div id="recipe-wrap">
         <div id="recipe-photo">
-            <img src="{{ recipe.photo }}" alt="recipe photo">
+            {% if recipe.photos %}
+                <img src="{{ url_for('static', filename='photos/photo-' ~ recipe.photos[0].id ~ '.' ~ recipe.photos[0].file_extension) }}" alt="recipe photo">
+            {% else %}
+                <img src="../static/logo.png" alt="recipe photo">
+            {% endif %}
         </div>
         <div id="recipe-content">
             <div id="recipe-title">
