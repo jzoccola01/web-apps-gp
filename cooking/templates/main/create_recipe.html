@@ -5,7 +5,7 @@
 
     <div id="form-div">
         <h1>New Recipe</h1>
-        <form action="" id="recipe-form">
+        <form action="{{ url_for('recipe_creation.create') }}" id="recipe-form" method="post">
             <div class="form-item">
                 <label for="recipe-name">Recipe Name</label>
                 <input class="input" type="text" id="recipe-name" name="recipe-name">
@@ -25,15 +25,54 @@
                 <label for="cook-time">Cook Time</label>
                 <input class="input" type="number" id="cook-time" name="cook-time">
             </div>
-
+            <br>
             <b>Ingredients</b> 
 
+            <input type="hidden" id="ingredient-count" name="ingredient-count" value="1">
+
             <div class="form-item">
-                <span class="ingredient-quantity">
-                    <label for="ingredient-name">Ingredient Name</label>
-                    <input class="input" type="text" id="ingredient-name" name="ingredient-name">
-                </span>
+                <div id="ingredient-list">
+                    <span class="ingredient-quantity">
+                        <label>Ingredient:
+                            <input list="ingredients" name="ingredient1" /></label>
+                            <datalist id="ingredients">
+                            <option value="Flour">
+                            <option value="Chicken">
+                            <option value="Pepper">
+                            <option value="Salt">
+                            <option value="Sugar">
+                            <option value="Jalapeños">
+                            </datalist>
+                        <label for="quantity">Quantity</label>
+                        <input class="input" type="number" id="quantity" name="quantity1">
+                        <label for="unit">Unit</label>
+                        <input class="input" type="text" id="unit" name="unit1">
+                    </span>
+                </div>
             </div>
+
+            <button class="button" type="button" onclick="addIngredient()">Add Ingredient</button>
+            <button class="button" type="button" onclick="removeIngredient()">Remove Ingredient</button>
+            <br>
+
+            <b>Steps</b>
+
+            <input type="hidden" id="step-count" name="step-count" value="1">
+
+            <div class="form-item">
+                <div id="step-list">
+                    <span class="step">
+                        <label for="step">Step 1</label>
+                        <textarea class="input" id="step" name="step1"></textarea>
+                    </span>
+                </div>
+            </div>
+
+            <button class="button" type="button" onclick="addStep()">Add Step</button>
+            <button class="button" type="button" onclick="removeStep()">Remove Step</button>
+            
+            <br>
+            <br>
 
             <button class="button" type="submit">Create!</button>
         </form>

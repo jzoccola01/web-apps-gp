@@ -6,6 +6,8 @@ from flask import Blueprint, render_template
 
 from . import model
 
+import flask_login
+
 bp = Blueprint("main", __name__)
 
 
@@ -42,5 +44,6 @@ def profile():
     return render_template("main/profile.html")
 
 @bp.route("/create")
+@flask_login.login_required
 def create():
     return render_template("main/create_recipe.html")
