@@ -24,13 +24,16 @@
                 <div id="user-dropdown" class="dropdown-content">
                     <a href="">Log In / Log Out</a>
                     <a href="">Create Account</a>
-                    <a href="./main/profile.html">My Profile</a>
+                    <!-- Since I cannot import flask_login I default the user_id to 1 for testing -->
+                    <a href="{{ url_for('profile.get_profile', user_id=1) }}">My Profile</a>
                 </div>
             </div>
 
         </header>
         <section class="content">
-            <!-- {% block content %}{% endblock %} -->
+            {% block content %}
+            <!-- Here is displayed whatever page the user is currently on -->
+            {% endblock %}
         </section>
         <footer><small>Developed for Web Applications course at UC3M</small></footer>
     </body>
