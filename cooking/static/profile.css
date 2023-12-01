@@ -1,0 +1,32 @@
+/* Import base styles */
+@import url('base.css');
+
+/* Additional styles for profile page, not included in base.css */
+body {
+    background-color: var(--background);
+}
+
+.profile-content {
+    margin: 20px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-details {
+    color: var(--primary);
+}
+
+.create-recipe-btn button {
+    background-color: var(--primary);
+    color: var(--light-text);
+}
+
+.recipes-created,
+.bookmarked-recipes {
+    margin-top: 20px;
+}
