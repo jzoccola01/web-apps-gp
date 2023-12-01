@@ -1,6 +1,6 @@
 import random
 from flask import Blueprint, request, redirect, url_for, flash
-from . import db, bcrypt
+from .. import db, bcrypt
 from . import model
 import flask_login
 

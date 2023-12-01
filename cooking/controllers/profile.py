@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, abort
 from . import model
-from . import db
+from .. import db
 
 bp = Blueprint("profile", __name__)
 

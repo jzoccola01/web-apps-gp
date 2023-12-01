@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request, url_for, redirect
 
 from . import model
 
-from . import db
+from .. import db
 
 import flask_login
 

@@ -4,7 +4,7 @@ from sqlalchemy import func
 from flask import Blueprint, render_template, request, url_for, redirect
 
 from . import model
-from . import db
+from .. import db
 
 bp = Blueprint("recipe", __name__)
 
