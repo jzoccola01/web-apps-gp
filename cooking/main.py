@@ -11,7 +11,6 @@ import flask_login
 
 bp = Blueprint("main", __name__)
 
-
 @bp.route("/")
 def index():
     query = db.select(model.Recipe)
