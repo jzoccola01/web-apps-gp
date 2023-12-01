@@ -1,7 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
+    <!-- Profile Content -->
+    <section class="profile-content">
+        <div class="user-info">
+            <div class="user-details">
+                <h2> <b>Username: {{ user.username }} </b></h2>
+                <p><b>Member of Recipe Roster since: {{ user.timestamp }}</b></p>
+            </div>
+        </div>
+        
+        <div class="recipes-created">
+            <h3>Recipes You've Created</h3>
+            {% for recipe in user.recipes %}
+                <div class="recipe">
+                    <!-- We can add the recipe photo here and use some css to make it nice also-->
+                    <div class="recipe-info">
+                        <h4><b> Recipe: </b>{{ recipe.title }}</h4>
+                        <p><b> Description: </b>{{ recipe.description }}</p>
+                        <p><b> Cook Time: </b>: {{ recipe.cook_time }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="bookmarked-recipes">
+            <h3>Bookmarked Recipes</h3>
+            <!-- Display the user's bookmarked recipes here -->
+            {% for b_recipe in user.bookmarks %}
+                <div class="recipe">
+                <!-- We can add the recipe photo here and use some css to make it nice also-->
+                <div class="recipe-info">
+                    <h4><b> Bookmarked Recipe: </b>{{ b_recipe.recipe.title }}</h4>
+                    <p><b> Description: </b>{{ b_recipe.recipe.description }}</p>
+                    <p><b> Cook Time: </b>: {{ b_recipe.recipe.cook_time }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="user-photos">
+            <h3>Photo's you've uploaded for recipe's</h3>
+            {% for photo in user.photos %}
+                <img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
+            {% endfor %}
+        </div>
 
     </section>
 {% endblock %}
