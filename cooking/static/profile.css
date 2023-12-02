@@ -1,0 +1,75 @@
+@import url("base.css");
+
+/* Profile Page CSS *************************************** */
+.profile-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-details {
+    background-color: var(--background-overlay);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px var(--shadow-color);
+}
+
+.user-details h2 {
+    color: var(--primary);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.user-details p {
+    color: var(--secondary);
+    font-size: 16px;
+}
+
+.section-title {
+    font-size: 28px;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.recipe {
+    border: 1px solid var(--background-overlay);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px var(--shadow-color);
+}
+
+.recipe-info {
+    text-align: left;
+}
+
+.recipe-info h4 {
+    color: var(--primary);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.recipe-info p {
+    color: var(--secondary);
+    font-size: 16px;
+}
+
+.user-photos img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px var(--shadow-color);
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 600px) {
+    .profile-content {
+        padding: 10px;
+    }
+}
