@@ -26,7 +26,7 @@ header {
     position: sticky;
     top: 0px;
     width: 100%;
-    z-index : 3;
+    z-index: 3;
 }
 
 footer {
@@ -36,8 +36,6 @@ footer {
 
 #header-logo {
     margin-left: 50px;
-    /* max-width: 100%;
-    height: auto; */
 }
 
 #searchbar {
@@ -46,11 +44,9 @@ footer {
     height: 30px;
     padding-left: 10px;
     font-size: 20px;
-    /* border: 3px solid green; */
 }
 
 #searchbar-form {
-    /* border: 3px solid red; */
     margin-left: 50px;
 }
 
@@ -58,7 +54,6 @@ footer {
     display: flex;
     flex-direction: row;
     gap: 5px;
-    /* border: 3px solid orange; */
     position: relative;
     top: 55px;
 }
@@ -87,7 +82,6 @@ footer {
 
 #header-user {
     align-items: center;
-    /* border: 3px solid blue; */
     position: relative;
     left: 300px;
 }
@@ -99,7 +93,6 @@ footer {
 
 #user-dropdown-button {
     width: 100px;
-    /* border: 3px solid purple; */
     position:relative;
     top: 55px;
 }
@@ -110,8 +103,8 @@ footer {
     background-color: var(--background-overlay);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px var(--shadow-color);
-    top: 50px;
-    left: -15px;
+    top: 100%; /* Adjusted to position below the button */
+    left: 0;
     border-radius: 10px;
     z-index: 3;
 }
@@ -136,7 +129,7 @@ footer {
     align-items: center;
     position: fixed;
     display: none;
-    width: 99%;
+    width: 100%;
     height: 100%;    
     background-color: #69696974;
 }
@@ -162,7 +155,6 @@ footer {
     height: 30px;
     padding-left: 10px;
     width: 100%;
-    /* font-size: 20px; */
 }
 
 input:focus {
@@ -176,10 +168,9 @@ input:focus {
 
 #close {
     position: absolute;
-    /* background: red; */
-    color: white;
-    top: 0px;
-    right: 0px;
+    color: var(--light-text);
+    top: 0;
+    right: 0;
 }
 
 #signup-form-header {
