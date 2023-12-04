@@ -14,18 +14,10 @@ def recipe(recipe_id):
 
     recipe = db.get_or_404(model.Recipe, recipe_id)
 
-    query = db.select(model.QuantifiedIngredient).where(model.QuantifiedIngredient.recipe_id == recipe.id)
-    ingredients = db.session.execute(query).scalars().all()
+    rating_value = db.session.query(func.avg(model.Rating.rating)).where(model.Rating.recipe_id == recipe.id).scalar()
+    rating_value = round(rating_value * 2) / 2
 
-    query = db.select(model.Step).where(model.Step.recipe_id == recipe.id)
-    steps = db.session.execute(query).scalars().all()
-
-    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe.id)
-    ratings = db.session.execute(query).scalars().all()
-
-    rating_value = db.session.query(func.avg(model.Rating.rating)).scalar()
-
-    return render_template("main/recipe.html", recipe=recipe, ingredients=ingredients, steps=steps, ratings=ratings, rating_value=rating_value)
+    return render_template("main/recipe.html", recipe=recipe, rating_value=rating_value)
 
 
 @bp.route("/new_rating", methods=["POST"])
