@@ -14,7 +14,7 @@
                 {% endif %}
             </div>
             <div style="padding-top: 10px;">
-                by: <a href="">{{recipe.user.username}}</a>
+                by: <a href="{{ url_for('profile.get_profile', user_id = recipe.user_id) }}">{{recipe.user.username}}</a>
             </div>
             <div class="starsheader">
                 <span>Rating: </span>
@@ -39,7 +39,7 @@
         <!-- <div class="box2">
             <img class="main_img" src="static/placeholder-photo.jpeg" alt="User uploaded image of recipe">
         </div> -->
-        
+
         <div class="box2">
             {% if recipe.photos %}
                 {% for photo in recipe.photos %}
@@ -77,7 +77,7 @@
     </section>
 
 
-    <section class="container_sub">
+    <section class="container_sub" id="reviews">
         <div class = "recipeh1">
             Reviews
         </div>
@@ -89,8 +89,8 @@
 
 
         <div>
-            {% if current_user.is_authenticated: %}
-                <form action="{{ url_for('recipe.new_rating') }}" method="post" style="padding-top: 20px;">
+            {% if current_user.is_authenticated and current_user != recipe.user and previously_rated == 0 %}
+                <form action="{{ url_for('recipe.new_rating') }}" method="post" enctype="multipart/form-data" style="padding-top: 20px;">
                     <label for="stars">Choose a rating:</label>
                     <select name="stars">
                         <option value="1">1 Star</option>
@@ -116,12 +116,24 @@
                     <div>
                         <textarea name="text"></textarea>
                     </div>
+
+                    <div class="form-item">
+                        <label for="recipe-image">Upload Photo</label>
+                        <input type="file" name="photo" accept="image/jpeg,image/png" id="recipe-image">
+                    </div>
+
                     <div>
                         <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
                         <input type="submit" value="Review"/>
                     </div>
                 </form>
             {% endif %}
+
+            {% previously_rated == 1 %}
+                <!-- EDIT REVIEW FORM -->
+            {% endif %}
+
+
         </div>
 
 
@@ -132,16 +144,8 @@
 
     <!-- 
     TODO:
-        display photos    
-
-        upload photo button
-        
-        review hidden for users who already reviewed (edit option)
-
-        review metadata
-
-
-
+    
+        previous review edit option
 
     THEN STYLING
 

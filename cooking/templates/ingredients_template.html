@@ -1,5 +1,5 @@
 <div class="ingredients">
     {% for ingredient in recipe.quantified_ingredients %}
-            <div class="text">{{ ingredient.quantity }} {{ ingredient.ingredient.name }}</div>   
+            <div class="text">{{ ingredient.quantity }} {{ingredient.unit}} {{ ingredient.ingredient.name }}</div>   
     {% endfor %}
 </div>
