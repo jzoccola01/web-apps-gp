@@ -36,9 +36,21 @@
             </div>
         </div>
 
-        <div class="box2">
+        <!-- <div class="box2">
             <img class="main_img" src="static/placeholder-photo.jpeg" alt="User uploaded image of recipe">
+        </div> -->
+        
+        <div class="box2">
+            {% if recipe.photos %}
+                {% for photo in recipe.photos %}
+                    <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
+                {% endfor %}
+            {% else %}
+                <!-- Placeholder image or alternative content if no photos are available -->
+                <img class="main_img" src="static/placeholder-photo.jpeg" alt="Placeholder image">
+            {% endif %}
         </div>
+
     </section>
 
 
@@ -120,8 +132,6 @@
 
     <!-- 
     TODO:
-
-
         display photos    
 
         upload photo button
