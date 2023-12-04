@@ -22,3 +22,18 @@ def index():
 @flask_login.login_required
 def create():
     return render_template("main/create_recipe.html")
+
+@bp.route("/bookmark", methods=["POST"])
+@flask_login.login_required
+def bookmark():
+    recipe_id = request.form.get("recipe-id")
+    user_id = flask_login.current_user.id
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == user_id)
+    bookmark = db.session.execute(query).scalar_one_or_none()
+    if bookmark:
+        db.session.delete(bookmark)
+    else:
+        new_bookmark = model.Bookmark(user_id=user_id, recipe_id=recipe_id)
+        db.session.add(new_bookmark)
+    db.session.commit()
+    return redirect(url_for("main.index"))
