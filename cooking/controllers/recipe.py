@@ -2,7 +2,8 @@ import datetime
 import dateutil.tz
 from sqlalchemy import func
 from flask import Blueprint, render_template, request, url_for, redirect
-
+import flask_login
+from flask_login import current_user
 from . import model
 from .. import db
 
