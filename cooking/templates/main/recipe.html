@@ -3,7 +3,6 @@
 {% block content %}
     <link rel="stylesheet" href="../static/recipeview.css">
 
-
     <section class="container_main">
         <div class="box1">
             <div>
@@ -12,8 +11,9 @@
                 <a href="" style="padding-left: 20px;" style="font-size: small;">Save</a>
             </div>
             <div style="padding-top: 10px;">
-                by: <a href="">{{recipe.user.username}}</a>
+                by: <a href="{{ url_for('profile.get_profile', user_id=recipe.user.id) }}">{{ recipe.user.username }}</a>
             </div>
+
             <div class="starsheader">
                 <span>Rating: </span>
                 <span class="starsvalue">{{rating_value}}</span>
@@ -34,11 +34,21 @@
             </div>
         </div>
 
-        <div class="box2">
+        <!-- <div class="box2">
             <img class="main_img" src="static/placeholder-photo.jpeg" alt="User uploaded image of recipe">
+        </div> -->
+        <div class="box2">
+            {% if recipe.photos %}
+                {% for photo in recipe.photos %}
+                    <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
+                {% endfor %}
+            {% else %}
+                <!-- Placeholder image or alternative content if no photos are available -->
+                <img class="main_img" src="static/placeholder-photo.jpeg" alt="Placeholder image">
+            {% endif %}
         </div>
+        
     </section>
-
 
     <section class="container_sub">
         <div class = "recipeh1" style="width: 100%;">

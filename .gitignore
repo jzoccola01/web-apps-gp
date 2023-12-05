@@ -3,6 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Ignore .DS_Store files
+.DS_Store
+
+# Ignore all files in cooking/static/photos directory
+cooking/static/photos/*
+
 # User-specific files
 *.rsuser
 *.suo
