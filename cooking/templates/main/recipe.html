@@ -146,8 +146,69 @@
                 </form>
             {% endif %}
 
-            <!-- Edit review form goes here -->
 
+            {% if previously_rated == 1 %}
+            <div>
+                <form action="{{ url_for('recipe.edit_rating') }}" method="post" style="padding-top: 20px;">
+                    <label for="stars">Edit Your Rating:</label>
+                    <select name="stars">
+                        {% if previous_rating.rating == 1 %}
+                            <option value="1" selected="selected">1 Star</option>
+                            <option value="2">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        {% endif %}
+                        {% if previous_rating.rating == 2 %}
+                            <option value="1">1 Star</option>
+                            <option value="2" selected="selected">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        {% endif %}
+                        {% if previous_rating.rating == 3 %}
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Stars</option>
+                            <option value="3" selected="selected">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        {% endif %}
+                        {% if previous_rating.rating == 4 %}
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4" selected="selected">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        {% endif %}
+                        {% if previous_rating.rating == 5 %}
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5" selected="selected">5 Stars</option>
+                        {% endif %}
+                    </select>
+                    <div>
+                        <textarea name="text">{{ previous_rating.comment }}</textarea>
+                    </div>                
+                    <div>
+                        <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                        <input type="hidden" name="previous_rating_id" value="{{ previous_rating.id }}">
+
+                        <input type="submit" value="Edit Review"/>
+                    </div>
+                    
+                </form>
+            </div>
+            <div>
+                <form action="{{ url_for('recipe.delete_rating') }}" method="post" style="padding-top: 20px;">
+                    <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                    <input type="hidden" name="previous_rating_id" value="{{ previous_rating.id }}">
+                    <input type="submit" value="Delete Review"/>
+                </form>
+
+            </div>
+            {% endif %}
 
         </div>
 
