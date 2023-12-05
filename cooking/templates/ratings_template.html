@@ -1,5 +1,10 @@
 <div class="ratings">
-    {% for rating in ratings %}
-            <div style="padding-bottom: 10px;">{{rating.rating}} stars: {{ rating.comment }}</div>   
+    {% for rating in recipe.ratings %}
+            <div style="padding-bottom: 10px;">
+                <a href="{{ url_for('profile.get_profile', user_id = rating.user_id) }}">
+                    {{rating.user.username}}
+                </a>
+            </div> 
+            <div style="padding-bottom: 10px;">{{rating.rating}} stars: {{ rating.comment }}</div> 
     {% endfor %}
 </div>

@@ -3,17 +3,19 @@
 {% block content %}
     <link rel="stylesheet" href="../static/recipeview.css">
 
+
     <section class="container_main">
         <div class="box1">
             <div>
                 <span  class = "recipeh1">{{recipe.title}}</span>
                 <a href="" style="padding-left: 20px;" style="font-size: small;">Category</a>
-                <a href="" style="padding-left: 20px;" style="font-size: small;">Save</a>
+                {% if current_user.is_authenticated: %}
+                    <a href="" style="padding-left: 20px;" style="font-size: small;">Bookmark</a>
+                {% endif %}
             </div>
             <div style="padding-top: 10px;">
-                by: <a href="{{ url_for('profile.get_profile', user_id=recipe.user.id) }}">{{ recipe.user.username }}</a>
+                by: <a href="{{ url_for('profile.get_profile', user_id = recipe.user_id) }}">{{recipe.user.username}}</a>
             </div>
-
             <div class="starsheader">
                 <span>Rating: </span>
                 <span class="starsvalue">{{rating_value}}</span>
@@ -37,6 +39,7 @@
         <!-- <div class="box2">
             <img class="main_img" src="static/placeholder-photo.jpeg" alt="User uploaded image of recipe">
         </div> -->
+
         <div class="box2">
             {% if recipe.photos %}
                 {% for photo in recipe.photos %}
@@ -47,8 +50,9 @@
                 <img class="main_img" src="static/placeholder-photo.jpeg" alt="Placeholder image">
             {% endif %}
         </div>
-        
+
     </section>
+
 
     <section class="container_sub">
         <div class = "recipeh1" style="width: 100%;">
@@ -73,7 +77,7 @@
     </section>
 
 
-    <section class="container_sub">
+    <section class="container_sub" id="reviews">
         <div class = "recipeh1">
             Reviews
         </div>
@@ -85,37 +89,51 @@
 
 
         <div>
-            <form action="{{ url_for('recipe.new_rating') }}" method="post" style="padding-top: 20px;">
-                <label for="stars">Choose a rating:</label>
-                <select name="stars">
-                    <option value="1">1 Star</option>
-                    <option value="2">2 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="5">5 Stars</option>
-                </select>
-                <!-- <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                </div> -->
+            {% if current_user.is_authenticated and current_user != recipe.user and previously_rated == 0 %}
+                <form action="{{ url_for('recipe.new_rating') }}" method="post" enctype="multipart/form-data" style="padding-top: 20px;">
+                    <label for="stars">Choose a rating:</label>
+                    <select name="stars">
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="5">5 Stars</option>
+                    </select>
+                        <!-- <div class="rate">
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        </div> -->
 
-                
-                <div>
-                    <textarea name="text"></textarea>
-                </div>
-                <div>
-                    <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
-                    <input type="submit" value="Review"/>
-                </div>
-            </form>
+                        
+                    <div>
+                        <textarea name="text"></textarea>
+                    </div>
+
+                    <div class="form-item">
+                        <label for="recipe-image">Upload Photo</label>
+                        <input type="file" name="photo" accept="image/jpeg,image/png" id="recipe-image">
+                    </div>
+
+                    <div>
+                        <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                        <input type="submit" value="Review"/>
+                    </div>
+                </form>
+            {% endif %}
+
+            {% previously_rated == 1 %}
+                <!-- EDIT REVIEW FORM -->
+            {% endif %}
+
+
         </div>
 
 
@@ -125,16 +143,11 @@
 
 
     <!-- 
-    STILL NEEDED:
-        upload photo button
-
-        bookmarks hidden for logged out users
-        review hidden for logged out users
-        review hidden for users who already reviewed
-
+    TODO:
+    
+        previous review edit option
 
     THEN STYLING
-
 
 
     EVENTUALLY: 

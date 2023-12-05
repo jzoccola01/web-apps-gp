@@ -1,5 +1,5 @@
 <div class="steps">
-    {% for step in steps %}
+    {% for step in recipe.steps %}
             <div class="text">Step {{ step.seq_number }}: {{ step.description }}</div>   
     {% endfor %}
 </div>
