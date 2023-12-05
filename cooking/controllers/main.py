@@ -13,7 +13,8 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def index():
-    query = db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
+    # Default display is to order by average rating
+    query = db.select(model.Recipe).join(model.Rating).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
     recipes = db.session.execute(query).scalars().all()
 
     bookmarks = []
@@ -42,3 +43,25 @@ def bookmark():
         db.session.add(new_bookmark)
     db.session.commit()
     return redirect(url_for("main.index"))
+
+@bp.route('/sort', methods=['POST'])
+def sort():
+    sort = request.form.get("sort")
+    if sort == "option1":
+        # Query to get the average rating for each recipe and order by that
+        query = db.select(model.Recipe).join(model.Rating).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
+        recipes = db.session.execute(query).scalars().all()
+    elif sort == "option2":
+        # Query to get the number of ratings for each recipe and order by that
+        query = db.select(model.Recipe).join(model.Rating).group_by(model.Recipe.id).order_by(db.func.count(model.Rating.rating).desc())
+        recipes = db.session.execute(query).scalars().all()
+    elif sort == "option3":
+        # Query to order by the timestamp of each recipe
+        query = db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
+        recipes = db.session.execute(query).scalars().all()
+
+    bookmarks = []
+    if flask_login.current_user.is_authenticated:
+        query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
+        bookmarks = db.session.execute(query).scalars().all()
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks)

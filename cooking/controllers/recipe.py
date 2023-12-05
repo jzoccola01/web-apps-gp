@@ -22,7 +22,8 @@ def recipe(recipe_id):
     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe.id)
     ratings = db.session.execute(query).scalars().all()
 
-    rating_value = db.session.query(func.avg(model.Rating.rating)).scalar()
+    # Alec, I added the missing filter for only the ratings for this recipe
+    rating_value = db.session.query(func.avg(model.Rating.rating)).filter(model.Rating.recipe_id == recipe.id).scalar()
 
     return render_template("main/recipe.html", recipe=recipe, ingredients=ingredients, steps=steps, ratings=ratings, rating_value=rating_value)
 
