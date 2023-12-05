@@ -15,7 +15,12 @@ bp = Blueprint("main", __name__)
 def index():
     query = db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
     recipes = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes)
+
+    bookmarks = []
+    if flask_login.current_user.is_authenticated:
+        query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
+        bookmarks = db.session.execute(query).scalars().all()
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks)
 
 
 @bp.route("/create")

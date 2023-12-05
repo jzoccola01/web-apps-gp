@@ -23,7 +23,7 @@ def populate_database():
             email=f'user{i + 1}@example.com',
             username=f'user{i + 1}',
             password=f'password{i + 1}',
-            salt=randint(100, 999),
+            salt=randint(0, 100000),
             timestamp=datetime.utcnow()
         )
         users.append(user)
@@ -46,7 +46,8 @@ def populate_database():
             description=f'This is recipe {i + 1}',
             user_id=choice(users).id,
             servings=randint(2, 8),
-            cook_time=randint(15, 60)
+            cook_time=randint(15, 60),
+            timestamp=datetime.utcnow()
         )
         recipes.append(recipe)
         db.session.add(recipe)
