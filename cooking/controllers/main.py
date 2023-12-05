@@ -21,7 +21,7 @@ def index():
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks)
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1")
 
 
 @bp.route("/create")
@@ -64,4 +64,4 @@ def sort():
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks)
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort)
