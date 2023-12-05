@@ -9,7 +9,8 @@
                 <img src="../static/logo.png" alt="recipe photo">
             {% endif %}
         </div>
-        <div id="recipe-content">
+        <div id="recipe-content"> 
+            <!-- TODO: Put rating here -->
             <div id="recipe-title">
                 <a href="{{ url_for('recipe.recipe', recipe_id=recipe.id) }}">
                     {{ recipe.title }}

@@ -64,6 +64,13 @@
             </div>
 
             <div id="lower-body">
+                {% if sort == 'option1' %}
+                    <h4>Sorted by Highest Rating</h4>
+                {% elif sort == 'option2' %}
+                    <h4>Sorted by Most Reviewed</h4>
+                {% elif sort == 'option3' %}
+                    <h4>Sorted by Most Recent</h4>
+                {% endif %}
                 <div id="recipe-list">
                     {% for recipe in recipes %}
                         {% include 'recipe_preview.html' %}
