@@ -36,7 +36,14 @@ def recipe(recipe_id):
     else:
         previously_rated = 0
 
-    return render_template("main/recipe.html", recipe=recipe, rating_value=rating_value, previously_rated=previously_rated)
+
+    # query bookmarks
+    bookmarks = []
+    if flask_login.current_user.is_authenticated:
+        query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
+        bookmarks = db.session.execute(query).scalars().all()
+
+    return render_template("main/recipe.html", recipe=recipe, rating_value=rating_value, previously_rated=previously_rated, bookmarks=bookmarks)
 
 
 @bp.route("/new_rating", methods=["POST"])
@@ -99,3 +106,23 @@ def edit_rating():
 
 # return redirect(url_for("recipe.recipe", recipe_id = recipe_id))
     return 0
+
+
+
+
+
+@bp.route("/recipe_bookmark", methods=["POST"])
+@flask_login.login_required
+def recipe_bookmark():
+    recipe_id = request.form.get("recipe-id")
+    user_id = flask_login.current_user.id
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == user_id)
+    bookmark = db.session.execute(query).scalar_one_or_none()
+    if bookmark:
+        db.session.delete(bookmark)
+    else:
+        new_bookmark = model.Bookmark(user_id=user_id, recipe_id=recipe_id)
+        db.session.add(new_bookmark)
+    db.session.commit()
+    
+    return redirect(url_for("recipe.recipe", recipe_id = recipe_id))
