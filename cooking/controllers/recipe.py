@@ -12,6 +12,8 @@ from flask import current_app
 
 bp = Blueprint("recipe", __name__)
 
+
+### GET RECIPE PAGE ###
 @bp.route("/recipe/<int:recipe_id>")
 def recipe(recipe_id):
 
@@ -31,10 +33,13 @@ def recipe(recipe_id):
         previous = db.session.execute(query).scalars().all()
         if(len(previous) == 0):
             previously_rated = 0
+            previous_rating=0
         else:
             previously_rated = 1
+            previous_rating=previous[0]
     else:
         previously_rated = 0
+        previous_rating=0
 
 
     # query bookmarks
@@ -43,9 +48,11 @@ def recipe(recipe_id):
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
 
-    return render_template("main/recipe.html", recipe=recipe, rating_value=rating_value, previously_rated=previously_rated, bookmarks=bookmarks)
+    return render_template("main/recipe.html", recipe=recipe, rating_value=rating_value, previously_rated=previously_rated, previous_rating=previous_rating, bookmarks=bookmarks)
 
 
+
+### CREATE NEW RATING ###
 @bp.route("/new_rating", methods=["POST"])
 def new_rating():
     comment = request.form.get("text")
@@ -98,19 +105,43 @@ def new_rating():
 
 
 
-
+### EDIT CURRENT USER'S RATING ###
 @bp.route("/edit_rating", methods=["POST"])
 def edit_rating():
-
-# CONTROLLER FOR EDITING RATINGS
-
-# return redirect(url_for("recipe.recipe", recipe_id = recipe_id))
-    return 0
+    previous_rating_id = request.form.get("previous_rating_id")
+    query = db.select(model.Rating).where(model.Rating.id == previous_rating_id)
+    current_rating = db.session.execute(query).scalar_one()
 
 
+    comment = request.form.get("text")
+    rating = request.form.get("stars")
+    recipe_id = request.form.get("recipe_id")
+
+    current_rating.rating = rating
+    current_rating.comment = comment
+
+    db.session.commit()
+
+    return redirect(url_for("recipe.recipe", recipe_id = recipe_id))
+
+
+@bp.route("/delete_rating", methods=["POST"])
+def delete_rating():
+    previous_rating_id = request.form.get("previous_rating_id")
+    query = db.select(model.Rating).where(model.Rating.id == previous_rating_id)
+    current_rating = db.session.execute(query).scalar_one()
+
+    db.session.delete(current_rating)
+    db.session.commit()
+
+    recipe_id = request.form.get("recipe_id")
+
+    return redirect(url_for("recipe.recipe", recipe_id = recipe_id))
 
 
 
+
+### BOOKMARK RECIPE ###
 @bp.route("/recipe_bookmark", methods=["POST"])
 @flask_login.login_required
 def recipe_bookmark():
@@ -124,5 +155,5 @@ def recipe_bookmark():
         new_bookmark = model.Bookmark(user_id=user_id, recipe_id=recipe_id)
         db.session.add(new_bookmark)
     db.session.commit()
-    
+
     return redirect(url_for("recipe.recipe", recipe_id = recipe_id))
