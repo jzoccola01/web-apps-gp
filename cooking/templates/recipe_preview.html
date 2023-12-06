@@ -21,22 +21,24 @@
             </div>
         </div>
     </div>
-    <div id="bookmark-button">
-        <form action="{{ url_for('main.bookmark') }}" method="post">
-            <button class="button" type="submit">
-                {% set bookmarked = [0] %}
-                {% for bookmark in bookmarks %}
-                    {% if recipe.id == bookmark.recipe_id %}
-                        {% if bookmarked.insert(0, 1) %}{% endif %}
+    {% if current_user.is_authenticated %}
+        <div id="bookmark-button">
+            <form action="{{ url_for('main.bookmark') }}" method="post">
+                <button class="button" type="submit">
+                    {% set bookmarked = [0] %}
+                    {% for bookmark in bookmarks %}
+                        {% if recipe.id == bookmark.recipe_id %}
+                            {% if bookmarked.insert(0, 1) %}{% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if bookmarked[0] == 1 %}
+                        <img src="../static/bookmark-filled.png" alt="bookmark icon" width="20px" id="bookmark">
+                    {% else %}
+                        <img src="../static/bookmark-empty.png" alt="bookmark icon" width="20px" id="bookmark">
                     {% endif %}
-                {% endfor %}
-                {% if bookmarked[0] == 1 %}
-                    <img src="../static/bookmark-filled.png" alt="bookmark icon" width="20px" id="bookmark">
-                {% else %}
-                    <img src="../static/bookmark-empty.png" alt="bookmark icon" width="20px" id="bookmark">
-                {% endif %}
-            </button>
-            <input type="hidden" name="recipe-id" value="{{ recipe.id }}">
-        </form>
-    </div>
+                </button>
+                <input type="hidden" name="recipe-id" value="{{ recipe.id }}">
+            </form>
+        </div>
+    {% endif %}
 </div>

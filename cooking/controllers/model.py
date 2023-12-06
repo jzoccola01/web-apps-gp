@@ -37,6 +37,7 @@ class Recipe(db.Model):
     bookmarks = db.relationship('Bookmark', back_populates='recipe')
     photos = db.relationship('Photo', back_populates='recipe')
     timestamp = db.Column(db.DateTime, nullable=False)
+    category = db.Column(db.String(64), nullable=True)
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
