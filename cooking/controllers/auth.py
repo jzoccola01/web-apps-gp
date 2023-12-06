@@ -30,7 +30,8 @@ def login_signup(): # TODO: separate into two separate routes with views
         new_user = model.User(email=email, username=username, password=password_hash, salt=salt, timestamp=datetime.datetime.now())
         db.session.add(new_user)
         db.session.commit()
-        flash("Successfully signed up!")
+        flask_login.login_user(new_user)
+        # flash("Successfully signed up!")
         return redirect(url_for("main.index"))
     else:
         email = request.form.get("email")
