@@ -7,21 +7,28 @@
         <div id="side-bar">
             <div id="filter">
                 <h2>Filter</h2>
-                <form action="" id="filter-form">
+                <form action="{{ url_for('main.filter') }}" id="filter-form" method="POST">
                     <div class="list-item">
-                        <input class="input" type="radio" id="breakfast" name="filter">
+                        <input id="none" class="input" type="radio" name="filter" value="none">
+                        <label for="none">All</label>
+                    </div>
+
+                    <div class="list-item">
+                        <input class="input" type="radio" id="breakfast" name="filter" value="breakfast">
                         <label for="breakfast">Breakfast</label>
                     </div>
                     
                     <div class="list-item">
-                        <input class="input" type="radio" id="lunch" name="filter">
+                        <input class="input" type="radio" id="lunch" name="filter" value="lunch">
                         <label for="lunch">Lunch</label>
                     </div>
                     
                     <div class="list-item">
-                        <input class="input" type="radio" id="dinner" name="filter">
+                        <input class="input" type="radio" id="dinner" name="filter" value="dinner">
                         <label for="dinner">Dinner</label>
                     </div>
+
+                    <input type="hidden" name="sort" value="{{ sort }}">
 
                     <button class="button" type="submit">Apply!</button>
                 </form>
@@ -44,6 +51,8 @@
                         <input id="recent" class="input" type="radio" name="sort" value="option3">
                         <label for="recent">Most Recent</label>
                     </div>
+
+                    <input type="hidden" name="category" value="{{ category }}">
 
                     <button class="button" type="submit">Apply!</button>
                 </form>
@@ -73,7 +82,9 @@
                 {% endif %}
                 <div id="recipe-list">
                     {% for recipe in recipes %}
-                        {% include 'recipe_preview.html' %}
+                        {% if category == 'none' or recipe.category == category %}
+                            {% include 'recipe_preview.html' %}
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
