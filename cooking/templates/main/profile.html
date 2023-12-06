@@ -44,11 +44,12 @@
             <!-- Display the user's bookmarked recipes here -->
             {% for b_recipe in user.bookmarks %}
                 <div class="recipe">
-                <!-- We can add the recipe photo here and use some css to make it nice also-->
-                <div class="recipe-info">
-                    <h4><b> Bookmarked Recipe: </b>{{ b_recipe.recipe.title }}</h4>
-                    <p><b> Description: </b>{{ b_recipe.recipe.description }}</p>
-                    <p><b> Cook Time: </b>: {{ b_recipe.recipe.cook_time }}</p>
+                    <!-- We can add the recipe photo here and use some css to make it nice also-->
+                    <div class="recipe-info">
+                        <h4><b> Bookmarked Recipe: </b>{{ b_recipe.recipe.title }}</h4>
+                        <p><b> Description: </b>{{ b_recipe.recipe.description }}</p>
+                        <p><b> Cook Time: </b>: {{ b_recipe.recipe.cook_time }}</p>
+                    </div>
                 </div>
             {% endfor %}
         </div>

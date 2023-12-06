@@ -18,6 +18,7 @@ def create():
     description = request.form.get("recipe-desc")
     servings = float(request.form.get("servings"))
     cook_time = int(request.form.get("cook-time"))
+    category = request.form.get("category")
     ingredient_count = int(request.form.get("ingredient-count"))
     ingredients = []
     quantities = []
@@ -33,7 +34,7 @@ def create():
 
     user_id = flask_login.current_user.id
     
-    new_recipe = model.Recipe(title=title, description=description, servings=servings, cook_time=cook_time, user_id=user_id, timestamp=datetime.datetime.now())
+    new_recipe = model.Recipe(title=title, description=description, servings=servings, cook_time=cook_time, user_id=user_id, timestamp=datetime.datetime.now(), category=category)
     db.session.add(new_recipe)
     
     uploaded_photo = request.files['photo']
