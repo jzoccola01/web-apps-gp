@@ -76,4 +76,4 @@ def create():
 
     db.session.commit()
 
-    return redirect(url_for("main.index")) #TODO: change to recipe view of new recipe
+    return redirect(url_for("recipe.recipe", recipe_id = new_recipe.id))

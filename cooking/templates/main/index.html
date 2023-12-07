@@ -75,6 +75,19 @@
             </div>
 
             <div id="lower-body">
+                {% if search != '' %}
+                    <div id="search-info">
+                        <h4>Search Results for "{{ search }}"</h4>
+                        <a href="{{ url_for('main.index') }}">
+                            Cancel
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if category != 'none' %}
+                    <h4>Filtered by {{ category }}</h4>
+                {% endif %}
+
                 {% if sort == 'option1' %}
                     <h4>Sorted by Highest Rating</h4>
                 {% elif sort == 'option2' %}
