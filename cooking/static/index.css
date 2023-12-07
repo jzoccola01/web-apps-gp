@@ -161,3 +161,11 @@ h4 {
     font-weight: bold;
     margin: 0;
 }
+
+#search-info {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* border: 3px solid black; */
+    width: 100%;
+}
