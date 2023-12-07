@@ -79,12 +79,12 @@ def sort():
     sort_op = request.form.get("sort")
     if sort_op == "option1":
         # Query to order by the average rating of each recipe
-        query = db.select(model.Recipe).join(model.Rating).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
+        query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
         new_recipes = db.session.execute(query).scalars().all()
 
     elif sort_op == "option2":
         # Query to get the number of ratings for each recipe and order by that
-        query = db.select(model.Recipe).join(model.Rating).group_by(model.Recipe.id).order_by(db.func.count(model.Rating.rating).desc())
+        query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.count(model.Rating.rating).desc())
         new_recipes = db.session.execute(query).scalars().all()
     elif sort_op == "option3":
         # Query to order by the timestamp of each recipe
