@@ -21,9 +21,8 @@
                 <h2><b><u>Recipes You've Created</u></b></h2>
                 {% for recipe in user.recipes %}
                 <div class="recipe">
-                    <!-- We can add the recipe photo here and use some css to make it nice also-->
                     <div class="recipe-info">
-                        <h4><b> Recipe: </b>{{ recipe.title }}</h4>
+                        <h4><b> Recipe: </b><a href="{{ url_for('recipe.recipe', recipe_id = recipe.id) }}">{{recipe.title}}</a></h4>
                         <p><b> Description: </b>{{ recipe.description }}</p>
                         <p><b> Cook Time: </b>: {{ recipe.cook_time }}</p>
                     </div>
@@ -39,16 +38,17 @@
             {% endif %}
 
             {% if user.bookmarks != [] %}
-                <h3>Recipes You've Bookmarked</h3>
+            <h2><b><u>Recipes You've Bookmarked</u></b></h2>
             {% endif %}
             <!-- Display the user's bookmarked recipes here -->
             {% for b_recipe in user.bookmarks %}
                 <div class="recipe">
-                <!-- We can add the recipe photo here and use some css to make it nice also-->
-                <div class="recipe-info">
-                    <h4><b> Bookmarked Recipe: </b>{{ b_recipe.recipe.title }}</h4>
-                    <p><b> Description: </b>{{ b_recipe.recipe.description }}</p>
-                    <p><b> Cook Time: </b>: {{ b_recipe.recipe.cook_time }}</p>
+                    <!-- We can add the recipe photo here and use some css to make it nice also-->
+                    <div class="recipe-info">
+                        <h4><b>Bookmarked Recipe: </b><a href="{{ url_for('recipe.recipe', recipe_id = b_recipe.recipe.id) }}">{{b_recipe.recipe.title}}</a></h4>
+                        <p><b> Description: </b>{{ b_recipe.recipe.description }}</p>
+                        <p><b> Cook Time: </b>: {{ b_recipe.recipe.cook_time }}</p>
+                    </div>
                 </div>
             {% endfor %}
         </div>
