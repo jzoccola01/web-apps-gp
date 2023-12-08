@@ -9,17 +9,17 @@
                 <h2>Filter</h2>
                 <form action="" id="filter-form">
                     <div class="list-item">
-                        <input id="filter-cat" class="input" type="radio" id="breakfast" name="filter">
+                        <input class="input" type="radio" id="breakfast" name="filter">
                         <label for="breakfast">Breakfast</label>
                     </div>
                     
                     <div class="list-item">
-                        <input id="filter-cat" class="input" type="radio" id="lunch" name="filter">
+                        <input class="input" type="radio" id="lunch" name="filter">
                         <label for="lunch">Lunch</label>
                     </div>
                     
                     <div class="list-item">
-                        <input id="filter-cat" class="input" type="radio" id="dinner" name="filter">
+                        <input class="input" type="radio" id="dinner" name="filter">
                         <label for="dinner">Dinner</label>
                     </div>
 
@@ -29,20 +29,20 @@
 
             <div id="sort">
                 <h2>Sort</h2>
-                <form action="" id="sort-form">
+                <form action="{{ url_for('main.sort') }}" id="sort-form" method="POST">
                     <div class="list-item">
-                        <input id="filter-cat" class="input" type="radio" name="sort">
+                        <input id="rating" class="input" type="radio" name="sort" value="option1">
                         <label for="rating">Highest Rating</label>
                     </div>
                     
                     <div class="list-item">
-                        <input id="filter-cat" class="input" type="radio" name="sort">
+                        <input id="reviews" class="input" type="radio" name="sort" value="option2">
                         <label for="reviews">Most Reviewed</label>
                     </div>
                     
                     <div class="list-item">
-                        <input id="filter-cat" class="input" type="radio" name="sort">
-                        <label for="dinner">Most Recent</label>
+                        <input id="recent" class="input" type="radio" name="sort" value="option3">
+                        <label for="recent">Most Recent</label>
                     </div>
 
                     <button class="button" type="submit">Apply!</button>
