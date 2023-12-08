@@ -16,6 +16,7 @@
     height: 100%;
     position: sticky;
     top: 150px;
+    margin-left: 15px;
 }
 
 #side-bar h2 {
