@@ -6,11 +6,253 @@
 }
 
 /***** SOURCES: ******
+
+    add button: https://uiverse.io/andrew-demchenk0/mighty-moose-66
          
 */
 
 
-#form-div{
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1em;
+    padding-bottom: 50px;
+    min-width: 90em;
+}
+
+.recipeh1{
+    font-size: xx-large;
+    color: var(--secondary-variant);
+}
+
+.form-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:1em;
+}
+
+
+#recipe-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 70%;
+}
+
+#form-top{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+    padding-bottom: 2em;
+}
+
+.description_text{
+    width: 50%;
+    max-width: 70%;
+    height: 10em;
+    border-radius: 10px;
+    padding: 1em;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.description_text:active {
+    transform: scale(0.95);
+}
+
+.description_text:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+
+
+
+#form-middle{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+#form-middle-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    width: 50%;
+}
+
+.ingredient_input {
+    width: 8em;
+    height: .6em;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.ingredient_input:active {
+    transform: scale(0.95);
+}
+
+.ingredient_input:focus {
+    border-color: var(--primary);
+}
+
+#ingredient-list{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+#form-middle-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    width: 50%;
+}
+
+
+
+
+#step-list{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    width: 100%;
+}
+
+.step{
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 1em; 
+}
+
+
+.step_text{
+    width: 20em;
+    max-width: 50em;
+    height: 2.5em;
+    border-radius: 10px;
+    padding: 1em;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.step_text:active {
+    transform: scale(0.95);
+}
+
+.step_text:focus {
+    border-color: var(--primary);
+    outline: none;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+.recipe_form_input {
+    min-width: 15em;
+    height: .8em;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.recipe_form_input:active {
+    transform: scale(0.95);
+}
+
+.recipe_form_input:focus {
+    border-color: var(--primary);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#form-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+#selectors{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+}
+
+.selector-int {
+    width: 3.5em;
+    height: .6em;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.selector-int:active {
+    transform: scale(0.95);
+}
+
+.selector-int:focus {
+    border-color: var(--primary);
+}
+
+#category_button{
+    border-color: var(--secondary-variant2);
+}
+
+#category_button:hover{
+    border-color: var(--primary);
+}
+
+
+
+
+
+
+
+/* #form-div{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,14 +268,14 @@
 .recipeh1{
     font-size: xx-large;
     color: var(--secondary-variant);
-}
+} */
 
 
 
 
 
 /* recipe form */
-#recipe-form{
+/* #recipe-form{
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -91,7 +333,6 @@
     display: flex;
     flex-direction: row;
     gap: 1em;
-    /* max-width: 50%; */
     justify-content: center;
 }
 
@@ -182,7 +423,36 @@
 .step_text:focus {
     border-color: var(--primary);
     outline: none;
-}
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
