@@ -1,6 +1,6 @@
 from datetime import datetime
 from random import randint, choice
-from . import bcrypt
+from cooking import bcrypt
 from sqlalchemy.exc import IntegrityError
 from cooking import create_app, db
 from cooking.controllers.model import User, Bookmark, Recipe, Ingredient, QuantifiedIngredient, Step, Rating, Photo
