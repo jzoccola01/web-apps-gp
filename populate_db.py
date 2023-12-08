@@ -1,5 +1,6 @@
 from datetime import datetime
 from random import randint, choice
+from . import bcrypt
 from sqlalchemy.exc import IntegrityError
 from cooking import create_app, db
 from cooking.controllers.model import User, Bookmark, Recipe, Ingredient, QuantifiedIngredient, Step, Rating, Photo
@@ -19,11 +20,12 @@ def populate_database():
     # Create 5 users
     users = []
     for i in range(5):
+        new_salt = randint(0, 100000)
         user = User(
             email=f'user{i + 1}@example.com',
             username=f'user{i + 1}',
-            password=f'password{i + 1}',
-            salt=randint(0, 100000),
+            password=bcrypt.generate_password_hash(f'password{i + 1}' + str(new_salt)).decode("utf-8"),
+            salt=new_salt,
             timestamp=datetime.utcnow()
         )
         users.append(user)
