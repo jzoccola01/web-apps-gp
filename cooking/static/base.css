@@ -129,9 +129,9 @@ footer {
 .searchbar {
     width: 100%;
     min-width: 15em;
-    height: 1.6em;
+    height: 1.5em;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1.5px solid lightgrey;
     outline: none;
     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);

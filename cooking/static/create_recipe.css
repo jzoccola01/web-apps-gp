@@ -1,0 +1,270 @@
+@import url("base.css");
+
+:root{
+    --plusbutton: rgb(157, 157, 157);
+    --plusicon: rgb(125, 125, 125);
+}
+
+/***** SOURCES: ******
+         
+*/
+
+
+#form-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recipeh1{
+    font-size: xx-large;
+    color: var(--secondary-variant);
+}
+
+
+
+
+
+/* recipe form */
+#recipe-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+
+.recipe_form_input {
+    min-width: 15em;
+    height: .8em;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.recipe_form_input:active {
+    transform: scale(0.95);
+}
+
+.recipe_form_input:focus {
+    border-color: var(--primary);
+}
+
+.form-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:1em;
+}
+
+.description_text{
+    width: 25em;
+    max-width: 50em;
+    border-radius: 10px;
+    padding: 1em;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.description_text:active {
+    transform: scale(0.95);
+}
+
+.description_text:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+#selectors{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    /* max-width: 50%; */
+    justify-content: center;
+}
+
+.selector-int {
+    width: 3.5em;
+    height: .6em;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.selector-int:active {
+    transform: scale(0.95);
+}
+
+.selector-int:focus {
+    border-color: var(--primary);
+}
+
+#category_button{
+    border-color: var(--secondary-variant2);
+}
+
+#category_button:hover{
+    border-color: var(--primary);
+}
+
+.ingredient_input {
+    width: 8em;
+    height: .6em;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.ingredient_input:active {
+    transform: scale(0.95);
+}
+
+.ingredient_input:focus {
+    border-color: var(--primary);
+}
+
+#ingredient-list{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+#step-list{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    width: 100%;
+}
+
+.step{
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 1em; 
+}
+
+
+.step_text{
+    width: 20em;
+    max-width: 50em;
+    height: 2.5em;
+    border-radius: 10px;
+    padding: 1em;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.step_text:active {
+    transform: scale(0.95);
+}
+
+.step_text:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* add and subtract buttons */
+
+.plus_button {
+    position: relative;
+    width: 115px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--plusbutton);
+    border-radius: 5px;
+    background-color: var(--plusbutton);
+    padding: 0px;
+}
+
+.plus_button, .plus_button__icon, .plus_button__text {
+    transition: all 0.3s;
+}
+
+.plus_button .plus_button__text {
+    transform: translateX(27px);
+    color: #fff;
+    font-weight: 600;
+}
+.remove_button__text {
+    transform: translateX(15px);
+    color: #fff;
+    font-weight: 600;
+}
+
+.plus_button .plus_button__icon {
+    position: absolute;
+    transform: translateX(75px);
+    height: 100%;
+    width: 39px;
+    background-color: var(--plusicon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.plus_button .svg {
+    width: 30px;
+    stroke: #fff;
+}
+
+.plus_button:hover {
+    background: var(--plusicon);
+}
+
+.plus_button:hover .plus_button__text {
+    color: transparent;
+}
+
+.plus_button:hover .plus_button__icon {
+    width: 108px;
+    transform: translateX(0);
+}
+
+.plus_button:active .plus_button__icon {
+        background-color: var(--plusicon);
+}
+
+.plus_button:active {
+    border: 1px solid var(--plusicon);
+}   
+
+
+
