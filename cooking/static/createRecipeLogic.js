@@ -5,11 +5,11 @@ function addIngredient() {
     // newIngredient.setAttribute("class", "ingredient-quantity");
     newIngredient.innerHTML = ` 
             <label>Ingredient:</label>
-            <input class="ingredient_input" type="text" name="ingredient1" required/>
+            <input class="ingredient_input" type="text" name="ingredient` + ingredientCount + `" required/>
             <label for="quantity">Quantity</label>
-            <input class="selector-int" style="width: 2.5em;" type="number" id="quantity" name="quantity1" required>
+            <input class="selector-int" style="width: 2.5em;" type="number" id="quantity" name="quantity` + ingredientCount + `" required>
             <label for="unit">Unit</label>
-            <input class="ingredient_input" style="width: 5em;" type="text" name="unit1" required>
+            <input class="ingredient_input" style="width: 5em;" type="text" name="unit` + ingredientCount + `" required>
     `;
     document.getElementById("ingredient-list").appendChild(newIngredient);
     document.getElementById('ingredient-count').value = ingredientCount;
