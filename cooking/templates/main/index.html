@@ -9,22 +9,22 @@
                 <h2>Filter</h2>
                 <form action="{{ url_for('main.filter') }}" id="filter-form" method="POST">
                     <div class="list-item">
-                        <input id="none" class="input" type="radio" name="filter" value="none">
+                        <input id="none" class="input" type="radio" name="filter" value="none" required>
                         <label for="none">All</label>
                     </div>
 
                     <div class="list-item">
-                        <input class="input" type="radio" id="breakfast" name="filter" value="breakfast">
+                        <input class="input" type="radio" id="breakfast" name="filter" value="breakfast" required>
                         <label for="breakfast">Breakfast</label>
                     </div>
                     
                     <div class="list-item">
-                        <input class="input" type="radio" id="lunch" name="filter" value="lunch">
+                        <input class="input" type="radio" id="lunch" name="filter" value="lunch" required>
                         <label for="lunch">Lunch</label>
                     </div>
                     
                     <div class="list-item">
-                        <input class="input" type="radio" id="dinner" name="filter" value="dinner">
+                        <input class="input" type="radio" id="dinner" name="filter" value="dinner" required>
                         <label for="dinner">Dinner</label>
                     </div>
 
@@ -39,17 +39,17 @@
                 <h2>Sort</h2>
                 <form action="{{ url_for('main.sort') }}" id="sort-form" method="POST">
                     <div class="list-item">
-                        <input id="rating" class="input" type="radio" name="sort" value="option1">
+                        <input id="rating" class="input" type="radio" name="sort" value="option1" required>
                         <label for="rating">Highest Rating</label>
                     </div>
                     
                     <div class="list-item">
-                        <input id="reviews" class="input" type="radio" name="sort" value="option2">
+                        <input id="reviews" class="input" type="radio" name="sort" value="option2" required>
                         <label for="reviews">Most Reviewed</label>
                     </div>
                     
                     <div class="list-item">
-                        <input id="recent" class="input" type="radio" name="sort" value="option3">
+                        <input id="recent" class="input" type="radio" name="sort" value="option3" required>
                         <label for="recent">Most Recent</label>
                     </div>
 
