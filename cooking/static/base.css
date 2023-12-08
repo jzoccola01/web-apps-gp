@@ -192,6 +192,7 @@ footer {
 
 /* OVERLAY STYLING */
 
+/* login */
 .show {display:block;}
 
 .overlay {
@@ -217,15 +218,29 @@ footer {
 #login-form-content {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1em;
 }
 
 #login-form-content input {
-    border-radius: 10px;
-    height: 30px;
-    padding-left: 10px;
-    width: 100%;
+    min-width: 15em;
+    height: 1.6em;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
 }
+
+#login-form-content input:active {
+    transform: scale(0.95);
+}
+
+#login-form-content input:focus {
+    border-color: var(--primary);
+}
+    
+
 
 input:focus {
     border-color: var(--primary);
@@ -242,6 +257,7 @@ input:focus {
     right: 0;
 }
 
+/* signup */
 #signup-form-header {
     position: relative;
 }
@@ -249,12 +265,24 @@ input:focus {
 #signup-form-content {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1em;
 }
 
 #signup-form-content input {
-    border-radius: 10px;
-    height: 30px;
-    padding-left: 10px;
-    width: 100%;
+    min-width: 15em;
+    height: 1.6em;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+#signup-form-content input:active {
+    transform: scale(0.95);
+}
+
+#signup-form-content input:focus {
+    border-color: var(--primary);
 }
