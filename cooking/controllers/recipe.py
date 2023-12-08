@@ -59,6 +59,9 @@ def new_rating():
     stars = request.form.get("stars")
     recipe_id = request.form.get("recipe_id")
 
+    if(stars == None):
+        stars = 1
+
     # check if user has already reviewed (should never get called)
     query = db.select(model.Rating).where(model.Rating.user_id == current_user.id).where(model.Rating.recipe_id == recipe_id)
     previous = db.session.execute(query).scalars().all()
@@ -116,6 +119,9 @@ def edit_rating():
     comment = request.form.get("text")
     rating = request.form.get("stars")
     recipe_id = request.form.get("recipe_id")
+
+    if(rating == None):
+        rating = 1
 
     current_rating.rating = rating
     current_rating.comment = comment

@@ -5,43 +5,50 @@
         <title>Recipe Roster</title>
         <!-- Base2.css has some added css to fix the floating dropdown menu over Menu btn. Base.css can be deleted-->
         <link rel="stylesheet" href="../static/base.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <script type="text/javascript" src="{{ url_for('static', filename='dropdown.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='overlay.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='createRecipeLogic.js') }}"></script>
     </head>
     <body>
-        <header> <!-- Horizontally place the logo, then a searchbar, then a mini user bio tab with a dropdown menu -->
+
+
+        <!-- HEADER: LOGO, SEARCH, MENU BUTTONS -->
+        <header>
             <a href="{{ url_for('main.index') }}">
                 <img id="header-logo" src="{{ url_for('static', filename='header_logo.png') }}" alt="logo" width="250px">
             </a>
 
-            <div id="searchbar-form">
-                <form action="" id="searchform">
-                    <input id="searchbar" class="input" type="text" placeholder="Recipes, Ingredients, and More...">
-                    <button class="button" type="submit">Search!</button>
+            <div>
+                <form action=""  id="searchbar-form">
+                    <input class="searchbar" class="input" type="text" placeholder="Recipes, Ingredients, and More...">
+                    <button class="button" type="submit" style="min-width: 5em;">Search</button>
                 </form>
             </div>
 
-            <div id="header-user" class="dropdown">
+            <div id="header-menu">
                 {% if current_user.is_authenticated: %}
-                <!-- {{ current_user.username }} @Uri took this out of btn text because formatting got messed up when string was too long-->
-                    <button onclick="dropdownFunc()" class="dropbutton button" id="user-dropdown-button">Menu</button>
+                    <div style="display: flex; flex-direction: row; gap: .5em">
+                        <a href="{{ url_for('profile.get_profile', user_id=current_user.id) }}" style="text-decoration: none;">
+                            <button class="button">My Profile</button>
+                        </a>
+                        <a href="{{ url_for('auth.logout') }}" style="text-decoration: none;">
+                            <button class="button">Log Out</button>
+                        </a>
+                    </div>
                 {% else %}
-                    <button onclick="dropdownFunc()" class="dropbutton button" id="user-dropdown-button">Log In</button>
+                    <span>
+                        <button class="button" onclick="loginOverlayOn()">Log In</button>
+                    </span>
+                    <span>
+                        <button class="button" onclick="signUpOverlayOn()">Sign Up</button>
+                    </span>
                 {% endif %}
-                <div id="user-dropdown" class="dropdown-content">
-                    <!-- Display Login if logged out and vice versa -->
-                    {% if current_user.is_authenticated: %}
-                        <a href="{{ url_for('profile.get_profile', user_id=current_user.id) }}">My Profile</a>
-                        <a href="{{ url_for('auth.logout') }}">Log Out</a>
-                    {% else %}
-                        <a onclick="loginOverlayOn()">Log In</a>
-                        <a onclick="signUpOverlayOn()">Create Account</a>
-                    {% endif %}
-                </div>
             </div>
-
         </header>
+
+
+
 
         <div id="login-overlay" class="overlay">
             <div class="overlay-content">

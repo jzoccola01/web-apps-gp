@@ -1,137 +1,237 @@
 @import url("base.css");
 
-
-.container_main{
-    display: flex;
-    padding-left: 20vw;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    font-family: 'Roboto', sans-serif;
-}
-
-.container_sub{
-    display: flex;
-    flex-direction: column;
-    padding-left: 20vw;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    font-family: 'Roboto', sans-serif;
-}
-
-.box1{
-    width: 400px;
-    min-width: 300px;
-    padding-right: 10%;
-}
-
-
-.box2{
-
-}
+/***** SOURCES: ******
+         
+    Slideshow: https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp
+    Stars: https://uiverse.io/PriyanshuGupta28/swift-chipmunk-76
+*/
 
 
 
 .recipeh1{
-    color: var(--black);
     font-size: xx-large;
-    padding-bottom: 10px;
-    padding-top: 20px;
+    color: var(--secondary-variant);
 }
 
 .recipeh2{
-    color: var(--black);
-    font-size: x-large;
+    color: var(--secondary-variant);
 }
-
-.description{
-    padding-top: 20px;
-    color:  var(--black);
-    padding-bottom: 40px;
+ul {
+    list-style-type: circle;
 }
 
 
-.main_img{
-    max-width: 500px;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 6px;
-    
+
+/* MAIN CONTAINER FOR RECIPE INFO AND PHOTOS */
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.container_main{
+    display: flex;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 5em;
 }
 
-.main_img:hover{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.recipe_info{
+    width: 50%;
+    min-width: 20em;
+    height: fit-content;
 }
 
-.starsheader{
-    color: grey;
-    padding-top: 10px;
+#bookmark_button{
+    float: right;
+    padding-top: .6em;
+    padding-right: 2em;
 }
-
-.starsvalue{
-    color: var(--primary);
-}
-
 .metadata{
-    
+    display: flex;
+    color: var(--secondary-variant);
+    justify-content: center; 
+    align-items: center;
 }
-
-
 .vl {
-    border-left: 2px solid black;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    height: 200px;
-    left: 50%;
-    margin-left: -3px;
+    border-left: 2px solid var(--secondary-variant);
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    padding-left: 1.5em;
+    height: 1.5em;
   }
 
 
 
 
+/* PHOTOS */
+.gallery{
+    display: flex;
+    position: relative;
+    width: 50%;
+    min-width: 20em;
+    height: fit-content;
+    background-color: lightgray;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_img {
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+  
+.mySlides {
+    display: none;  
+    height: 25em;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.prev{
+    left:0;
+}
+  
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+  
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: .5s;
+}
+  
+.numbertext {
+    color:black;
+    font-size: 20px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
 
 
 
 
+/*** INGREDIENTS AND STEPS ***/
+.ingredients{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    min-width: 20em;
+    height: fit-content;
+    align-items: left;
+}
+
+.steps{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    min-width: 20em;
+    height: fit-content;
+    align-items: left;
+    
+}
 
 
+
+
+/*** REVIEWS ***/
+
+.container_sub{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating{
+    border-top: solid var(--secondary-variant2);
+    padding-top: .5em;
+    padding-left: 1em;
+}
+
+.new_rating{
+    display: flex;  
+    flex-direction: column;
+    gap: .5em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.edit_rating{
+    display: flex;  
+    flex-direction: column;
+    gap: .5em;
+    padding-top: 2em;
+    padding-bottom: .75em;
+}
 
 
 /* STARS FOR REVIEWS */
+.stars {
+    display: inline-block;
+}
+  
+.stars input {
+display: none;
+}
+
+.stars label {
+cursor: pointer;
+color: #ccc;
+transition: color 0.3s;
+}
+
+.stars label:before {
+content: '\2605';
+font-size: 20px;
+}
+
+.stars label:has(~ input:checked),
+.stars label:hover,
+.stars label:has(~ label:hover) {
+color: var(--primary);
+transition: color 0.3s;
+}
 
 
+/* text box for reviews */
+.review_text{
+    width: 100%;
+    border-radius: 10px;
+    padding: 1em;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    
+}
 
-.rate {
-    float: left;
-    height: 30px;
-    padding: 0 10px;
+.review_text:active {
+    transform: scale(0.95);
 }
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
+
+.review_text:focus {
+    border-color: var(--primary);
+    outline: none;
 }
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
+
+
