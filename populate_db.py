@@ -50,7 +50,7 @@ def populate_database():
             servings=randint(2, 8),
             cook_time=randint(15, 60),
             timestamp=datetime.utcnow(),
-            category=choice(['Breakfast', 'Lunch', 'Dinner', 'none'])
+            category=choice(['Breakfast', 'Lunch', 'Dinner', 'All'])
         )
         recipes.append(recipe)
         db.session.add(recipe)

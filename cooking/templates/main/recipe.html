@@ -47,11 +47,12 @@
                 <div class="recipeh2" style="padding-top: 1.5em; padding-right: 2em; max-height: fit-content;">
                     {{recipe.description}}
                 </div>
-    
-                <div style="padding-bottom: 1.5em; padding-top: 1.5em;">
-                    <span class="recipeh2">Similar Recipes For: </span>
-                    <a href="{{ url_for('main.category', category = recipe.category) }}" class="text_button" style="font-size: medium;">{{recipe.category}}</a>
-                </div>
+                {% if recipe.category != "All" %}
+                    <div style="padding-bottom: 1.5em; padding-top: 1.5em;">
+                        <span class="recipeh2">Similar Recipes For: </span>
+                        <a href="{{ url_for('main.category', category = recipe.category) }}" class="text_button" style="font-size: medium;">{{recipe.category}}</a>
+                    </div>
+                {% endif %}
     
                 <div class="metadata" style="padding-bottom: 2em; padding-top: 1.5em;">
                     <span style="font-size: xx-large;">{{recipe.cook_time}}</span>
@@ -117,7 +118,7 @@
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 {% else %}
                     <!-- Placeholder image or alternative content if no photos are available -->
-                    <img class="main_img" src="static/placeholder-photo.jpeg" alt="Placeholder image">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="recipe photo" style="width:50%; border: 1px solid black;">
                 {% endif %}
                
         
