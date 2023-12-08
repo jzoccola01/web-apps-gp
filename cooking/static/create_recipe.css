@@ -54,6 +54,7 @@
     width: 50%;
     max-width: 70%;
     height: 10em;
+    max-height: 40em;
     border-radius: 10px;
     padding: 1em;
     border: 1.5px solid lightgrey;
@@ -143,8 +144,9 @@
 
 
 .step_text{
-    width: 20em;
-    max-width: 50em;
+    width: 35em;
+    max-width: 50%;
+    max-height: 10em;
     height: 2.5em;
     border-radius: 10px;
     padding: 1em;
