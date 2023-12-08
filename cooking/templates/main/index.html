@@ -9,7 +9,7 @@
                 <h2>Filter</h2>
                 <form action="{{ url_for('main.filter') }}" id="filter-form" method="POST">
                     <div class="list-item">
-                        <input id="none" class="input" type="radio" name="filter" value="none" required>
+                        <input id="none" class="input" type="radio" name="filter" value="All" required>
                         <label for="none">All</label>
                     </div>
 
@@ -97,7 +97,7 @@
                 {% endif %}
                 <div id="recipe-list">
                     {% for recipe in recipes %}
-                        {% if category == 'none' or recipe.category == category %}
+                        {% if category == 'All' or recipe.category == category %}
                             {% include 'recipe_preview.html' %}
                         {% endif %}
                     {% endfor %}

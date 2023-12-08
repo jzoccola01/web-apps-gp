@@ -21,7 +21,7 @@ def index():
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="none", search="")
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search="")
 
 
 @bp.route("/create")
@@ -170,4 +170,16 @@ def search():
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
 
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="none", search=search)
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search=search)
+
+@bp.route("/category/<string:category>", methods=["GET"])
+def category(category):
+    # Default display is to order by average rating
+    query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
+    recipes = db.session.execute(query).scalars().all()
+
+    bookmarks = []
+    if flask_login.current_user.is_authenticated:
+        query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
+        bookmarks = db.session.execute(query).scalars().all()
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category=category, search="")
