@@ -1,240 +1,300 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <link rel="stylesheet" href="../static/recipeview.css">
 
+<!-- MAIN CONTAINER -->
+    <section class="container">
+        <section class="container_main">
 
-    <section class="container_main">
-        <div class="box1">
-            <div>
-                <span  class = "recipeh1">{{recipe.title}}</span>
-                <a href="" style="padding-left: 20px;" style="font-size: small;">Category</a>
-                {% if current_user.is_authenticated: %}
-                    <div id="bookmark-button">
-                        <form action="{{ url_for('recipe.recipe_bookmark') }}" method="post">
-                            <button class="button" type="submit">
-                                {% set bookmarked = [0] %}
-                                {% for bookmark in bookmarks %}
-                                    {% if recipe.id == bookmark.recipe_id %}
-                                        {% if bookmarked.insert(0, 1) %}{% endif %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% if bookmarked[0] == 1 %}
-                                    <img src="../static/bookmark-filled.png" alt="bookmark icon" width="20px" id="bookmark">
-                                {% else %}
-                                    <img src="../static/bookmark-empty.png" alt="bookmark icon" width="20px" id="bookmark">
-                                {% endif %}
-                            </button>
-                            <input type="hidden" name="recipe-id" value="{{ recipe.id }}">
-                        </form>
-                    </div>
+
+            <!-- RECIPE INFO -->
+            <div class="recipe_info">
+                <div>
+                        <span class="recipeh1"> {{recipe.title}}</span>
+                        {% if current_user.is_authenticated and current_user.id != recipe.user_id %}
+                            <span id="bookmark_button">
+                                <form action="{{ url_for('recipe.recipe_bookmark') }}" method="post" style="max-width: 3em;">
+                                    <button class="button" type="submit">
+                                        {% set bookmarked = [0] %}
+                                        {% for bookmark in bookmarks %}
+                                            {% if recipe.id == bookmark.recipe_id %}
+                                                {% if bookmarked.insert(0, 1) %}{% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if bookmarked[0] == 1 %}
+                                            <img src="../static/bookmark-filled.png" alt="bookmark icon" width="20px" id="bookmark">
+                                        {% else %}
+                                            <img src="../static/bookmark-empty.png" alt="bookmark icon" width="20px" id="bookmark">
+                                        {% endif %}
+                                    </button>
+                                    <input type="hidden" name="recipe-id" value="{{ recipe.id }}">
+                                </form>
+                            </span>
+                        {% endif %}
+                </div>
+    
+                <div class="recipeh2" style="padding-top: .5em;">
+                    Created By: <a href="{{ url_for('profile.get_profile', user_id = recipe.user_id) }}" class="text_button">{{recipe.user.username}}</a>
+                </div>
+    
+                <div class="recipeh2" style="padding-top: .5em;">
+                    <span>Rating: </span>
+                    <span style="color: var(--primary);">{{rating_value}} &#9733</span>
+                    <a href="#reviews" class="text_button">(reviews)</a>
+                </div>
+                
+    
+                <div class="recipeh2" style="padding-top: 1.5em; padding-right: 2em; max-height: fit-content;">
+                    {{recipe.description}}
+                </div>
+    
+                <div style="padding-bottom: 1.5em; padding-top: 1.5em;">
+                    <span class="recipeh2">Similar Recipes For: </span>
+                    <a href="" class="text_button" style="font-size: medium;">Category</a>
+                </div>
+    
+                <div class="metadata" style="padding-bottom: 2em; padding-top: 1.5em;">
+                    <span style="font-size: xx-large;">{{recipe.cook_time}}</span>
+                    <span style="padding-right: 5%;">  minutes</span>
+                    <span class="vl"></span>
+                    {% if recipe.servings == 1 %}
+                        <span style="font-size: xx-large;">{{recipe.servings}}</span> 
+                        <span> serving</span>
+                    {% else %}
+                        <span style="font-size: xx-large;">{{recipe.servings}}</span> 
+                        <span> servings</span>
+                    {% endif %}
+                </div>
+            </div>
+    
+    
+            <!-- IMAGE GALLERY -->
+    
+            <script>
+                let slideIndex = 1;
+                showSlides(slideIndex);
+                
+                function plusSlides(n) {
+                  showSlides(slideIndex += n);
+                }
+                
+                
+                function showSlides(n) {
+                  let i;
+                  let slides = document.getElementsByClassName("mySlides");
+                  if (n > slides.length) {slideIndex = 1}
+                  if (n < 1) {slideIndex = slides.length}
+                  for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                  }
+                  slides[slideIndex-1].style.display = "block";
+                }
+            </script>
+    
+    
+            <!-- Container for the image gallery -->
+            <div class="gallery">
+    
+                <!-- Full-width images with number text -->
+                {% if recipe.photos %}
+                    {% set total_photos = recipe.photos|length %}
+                    {% for photo in recipe.photos %}
+                        {% if loop.index == 1 %}
+                            <div class="mySlides" style="display: block;">
+                                <div class="numbertext">{{ loop.index }} / {{total_photos}}</div>
+                                <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
+                            </div>
+                        {% else %}
+                            <div class="mySlides">
+                                <div class="numbertext">{{ loop.index }} / {{total_photos}}</div>
+                                <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
+                            </div>
+                            <!-- <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe"> -->
+                        {% endif %}
+                    {% endfor %}
+                
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                {% else %}
+                    <!-- Placeholder image or alternative content if no photos are available -->
+                    <img class="main_img" src="static/placeholder-photo.jpeg" alt="Placeholder image">
                 {% endif %}
+               
+        
+            </div>      
+        </section>
+    
+    
+    
+    
+    
+    <!-- CONTAINER FOR INGREDIENTS AND STEPS -->
+    
+        <section class="container_main" style="padding-top: 5em;">
+            <div class="ingredients">
+                <div class = "recipeh1">Ingredients</div>  
+                <div>{% include 'ingredients_template.html' %}</div>
             </div>
-            <div style="padding-top: 10px;">
-                by: <a href="{{ url_for('profile.get_profile', user_id = recipe.user_id) }}">{{recipe.user.username}}</a>
+            <div class="steps">
+                <div class = "recipeh1">Directions</div>
+                <div>{% include 'steps_template.html' %}</div>
             </div>
-            <div class="starsheader">
-                <span>Rating: </span>
-                <span class="starsvalue">{{rating_value}}</span>
-                <a href="#reviews">(reviews)</a>
-            </div>
-
-            <div class="description">
-                {{recipe.description}}
-            </div>
-
-            <div class="metadata">
-                <span style="padding-right: 20px;">
-                    Cook Time: {{recipe.cook_time}} mins
-                </span>
-                <span class="vl">
-                    Servings: {{recipe.servings}} 
-                </span>
-            </div>
-        </div>
-
-        <!-- <div class="box2">
-            <img class="main_img" src="static/placeholder-photo.jpeg" alt="User uploaded image of recipe">
-        </div> -->
-
-        <div class="box2">
-            {% if recipe.photos %}
-                {% for photo in recipe.photos %}
-                    <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
-                {% endfor %}
-            {% else %}
-                <!-- Placeholder image or alternative content if no photos are available -->
-                <img class="main_img" src="static/placeholder-photo.jpeg" alt="Placeholder image">
-            {% endif %}
-        </div>
-
-    </section>
-
-
-    <section class="container_sub">
-        <div class = "recipeh1" style="width: 100%;">
-            Ingredients
-        </div>
-
-        <div>
-            {% include 'ingredients_template.html' %}
-        </div>
-
-
-    </section>
-
-    <section class="container_sub">
-        <div class = "recipeh1">
-            Steps
-        </div>
-        <div>
-            {% include 'steps_template.html' %}
-        </div>
-
-    </section>
-
-
-    <section class="container_sub" id="reviews">
-        <div class = "recipeh1">
-            Reviews
-        </div>
-
-        <div>
-            {% include 'ratings_template.html' %}
-        </div>
+        </section>
+    
 
 
 
-        <div>
-            {% if current_user.is_authenticated and current_user != recipe.user and previously_rated == 0 %}
-                <form action="{{ url_for('recipe.new_rating') }}" method="post" enctype="multipart/form-data" style="padding-top: 20px;">
-                    <label for="stars">Choose a rating:</label>
-                    <select name="stars">
-                        <option value="1">1 Star</option>
-                        <option value="2">2 Stars</option>
-                        <option value="3">3 Stars</option>
-                        <option value="4">4 Stars</option>
-                        <option value="5">5 Stars</option>
-                    </select>
-                        <!-- <div class="rate">
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="text">5 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text">1 star</label>
-                        </div> -->
 
-                        
-                    <div>
-                        <textarea name="text"></textarea>
-                    </div>
+  <!-- CONTAINER FOR REVIEWS -->
 
-                    <div class="form-item">
-                        <label for="recipe-image">Upload Photo</label>
-                        <input type="file" name="photo" accept="image/jpeg,image/png" id="recipe-image">
-                    </div>
+        <section class="container_sub" style="padding-top: 5em;">
+            <div class = "recipeh1" id="reviews">Reviews</div>
+            <div style="min-width: 20%;">
+                {% if current_user.is_authenticated and current_user != recipe.user and previously_rated == 0 %}
+                    <form action="{{ url_for('recipe.new_rating') }}" method="post" enctype="multipart/form-data" class="new_rating">
+                        <label for="stars">Write a Review:</label>
+                        <div class="stars">
+                            <label for="star1"></label>
+                            <input value="1" name="stars" id="star1" type="radio">
+                            <label for="star2"></label>
+                            <input value="2" name="stars" id="star2" type="radio">
+                            <label for="star3"></label>
+                            <input value="3" name="stars" id="star3" type="radio">
+                            <label for="star4"></label>
+                            <input value="4" name="stars" id="star4" type="radio">
+                            <label for="star5"></label>
+                            <input value="5" name="stars" id="star5" type="radio">
+                        </div>
 
-                    <div>
-                        <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
-                        <input type="submit" value="Review"/>
-                    </div>
-                </form>
-            {% endif %}
+                        <div> <textarea class="review_text" name="text" required></textarea></div>
+                        <div><input type="file" name="photo" accept="image/jpeg,image/png" id="file-id" class="upload_file"></div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                                <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                                <input class="button" type="submit" value="Submit"/>
+                        </div>
+                    </form>
+                {% endif %}
 
 
-            {% if previously_rated == 1 %}
-            <div>
-                <form action="{{ url_for('recipe.edit_rating') }}" method="post" style="padding-top: 20px;">
-                    <label for="stars">Edit Your Rating:</label>
-                    <select name="stars">
+
+
+
+                {% if previously_rated == 1 %}
+                <div>
+                    <form action="{{ url_for('recipe.edit_rating') }}" method="post" class="edit_rating">
+                        <label for="stars">Edit Your Review:</label>
+                        {% if previous_rating.rating == 0 %}
+                        <div class="stars">
+                            <label for="star1"></label>
+                            <input value="1" name="stars" id="star1" type="radio">
+                            <label for="star2"></label>
+                            <input value="2" name="stars" id="star2" type="radio">
+                            <label for="star3"></label>
+                            <input value="3" name="stars" id="star3" type="radio">
+                            <label for="star4"></label>
+                            <input value="4" name="stars" id="star4" type="radio">
+                            <label for="star5"></label>
+                            <input value="5" name="stars" id="star5" type="radio">
+                        </div>
+                        {% endif %}
                         {% if previous_rating.rating == 1 %}
-                            <option value="1" selected="selected">1 Star</option>
-                            <option value="2">2 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="5">5 Stars</option>
+                        <div class="stars">
+                            <label for="star1"></label>
+                            <input value="1" name="stars" id="star1" type="radio" checked>
+                            <label for="star2"></label>
+                            <input value="2" name="stars" id="star2" type="radio">
+                            <label for="star3"></label>
+                            <input value="3" name="stars" id="star3" type="radio">
+                            <label for="star4"></label>
+                            <input value="4" name="stars" id="star4" type="radio">
+                            <label for="star5"></label>
+                            <input value="5" name="stars" id="star5" type="radio">
+                        </div>
                         {% endif %}
                         {% if previous_rating.rating == 2 %}
-                            <option value="1">1 Star</option>
-                            <option value="2" selected="selected">2 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="5">5 Stars</option>
+                        <div class="stars">
+                            <label for="star1"></label>
+                            <input value="1" name="stars" id="star1" type="radio">
+                            <label for="star2"></label>
+                            <input value="2" name="stars" id="star2" type="radio" checked>
+                            <label for="star3"></label>
+                            <input value="3" name="stars" id="star3" type="radio">
+                            <label for="star4"></label>
+                            <input value="4" name="stars" id="star4" type="radio">
+                            <label for="star5"></label>
+                            <input value="5" name="stars" id="star5" type="radio">
+                        </div>
                         {% endif %}
                         {% if previous_rating.rating == 3 %}
-                            <option value="1">1 Star</option>
-                            <option value="2">2 Stars</option>
-                            <option value="3" selected="selected">3 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="5">5 Stars</option>
+                        <div class="stars">
+                            <label for="star1"></label>
+                            <input value="1" name="stars" id="star1" type="radio">
+                            <label for="star2"></label>
+                            <input value="2" name="stars" id="star2" type="radio">
+                            <label for="star3"></label>
+                            <input value="3" name="stars" id="star3" type="radio" checked>
+                            <label for="star4"></label>
+                            <input value="4" name="stars" id="star4" type="radio">
+                            <label for="star5"></label>
+                            <input value="5" name="stars" id="star5" type="radio">
+                        </div>
                         {% endif %}
                         {% if previous_rating.rating == 4 %}
-                            <option value="1">1 Star</option>
-                            <option value="2">2 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="4" selected="selected">4 Stars</option>
-                            <option value="5">5 Stars</option>
+                        <div class="stars">
+                            <label for="star1"></label>
+                            <input value="1" name="stars" id="star1" type="radio">
+                            <label for="star2"></label>
+                            <input value="2" name="stars" id="star2" type="radio">
+                            <label for="star3"></label>
+                            <input value="3" name="stars" id="star3" type="radio">
+                            <label for="star4"></label>
+                            <input value="4" name="stars" id="star4" type="radio" checked>
+                            <label for="star5"></label>
+                            <input value="5" name="stars" id="star5" type="radio">
+                        </div>
                         {% endif %}
                         {% if previous_rating.rating == 5 %}
-                            <option value="1">1 Star</option>
-                            <option value="2">2 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="5" selected="selected">5 Stars</option>
+                        <div class="stars">
+                            <label for="star1"></label>
+                            <input value="1" name="stars" id="star1" type="radio">
+                            <label for="star2"></label>
+                            <input value="2" name="stars" id="star2" type="radio">
+                            <label for="star3"></label>
+                            <input value="3" name="stars" id="star3" type="radio">
+                            <label for="star4"></label>
+                            <input value="4" name="stars" id="star4" type="radio">
+                            <label for="star5"></label>
+                            <input value="5" name="stars" id="star5" type="radio" checked>
+                        </div>
                         {% endif %}
-                    </select>
-                    <div>
-                        <textarea name="text">{{ previous_rating.comment }}</textarea>
-                    </div>                
-                    <div>
+
+                        <div><textarea name="text" class="review_text">{{ previous_rating.comment }}</textarea></div> 
+                        
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <input class="button" type="submit" value="Edit Review"/>
+                        </div>
                         <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
                         <input type="hidden" name="previous_rating_id" value="{{ previous_rating.id }}">
-
-                        <input type="submit" value="Edit Review"/>
-                    </div>
-                    
-                </form>
+                    </form>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <form action="{{ url_for('recipe.delete_rating') }}" method="post">
+                        <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                        <input type="hidden" name="previous_rating_id" value="{{ previous_rating.id }}">
+                        <input type="submit" class="button" value="Remove Review"/>
+                    </form>
+    
+                </div>
+                {% endif %}
             </div>
-            <div>
-                <form action="{{ url_for('recipe.delete_rating') }}" method="post" style="padding-top: 20px;">
-                    <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
-                    <input type="hidden" name="previous_rating_id" value="{{ previous_rating.id }}">
-                    <input type="submit" value="Delete Review"/>
-                </form>
-
-            </div>
-            {% endif %}
-
-        </div>
 
 
+
+
+
+
+            <div style="width: 40%; padding-top: 2em;">{% include 'ratings_template.html' %}</div>
+
+        </section>
     </section>
-
-
-
-
-    <!-- 
-    TODO:
-    
-        previous review edit option (add controller)
-        Bookmarks (add controller)
-
-    THEN STYLING:
-        slideshow:
-        https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp
-    
-    -->
-
-
-
-
-
-
-    <section class=""></section>
-
 {% endblock %}
