@@ -19,9 +19,9 @@
                 <img id="header-logo" src="{{ url_for('static', filename='header_logo.png') }}" alt="logo" width="250px">
             </a>
 
-            <div id="searchbar-form">
-                <form action="{{ url_for('main.search') }}" id="searchform" method="POST">
-                    <input id="searchbar" class="input" type="text" placeholder="Recipes, Ingredients, and More..." name="search">
+            <div>
+                <form action="{{ url_for('main.search') }}" id="searchbar-form" method="POST">
+                    <input class="searchbar" type="text" placeholder="Recipes, Ingredients, and More..." name="search">
                     <input type="hidden" name="category" value="{{ category }}">
                     <input type="hidden" name="sort" value="{{ sort }}">
                     <button class="button" type="submit" style="min-width: 5em;">Search!</button>
