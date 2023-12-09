@@ -291,3 +291,10 @@ input:focus {
 #signup-form-content input:focus {
     border-color: var(--primary);
 }
+
+.notification {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+}

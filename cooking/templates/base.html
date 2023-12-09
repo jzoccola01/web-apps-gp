@@ -49,8 +49,12 @@
 
 
 
-
-        <div id="login-overlay" class="overlay">
+        {% if login %}
+        <div id="login-overlay" class="overlay" style="display: flex">
+        {% else %}
+        <div id="login-overlay" class="overlay" style="display: none">
+        {% endif %}
+        <!-- <div id="login-overlay" class="overlay"> -->
             <div class="overlay-content">
                 <form id="login-form" action="{{ url_for('auth.login_signup') }}" method="post">
                     <div id="login-form-header">
@@ -80,7 +84,13 @@
             </div>
         </div>
 
-        <div id="signup-overlay" class="overlay" style="padding-top: 3%;">
+
+        {% if signup %}
+        <div id="signup-overlay" class="overlay" style="display: flex">
+        {% else %}
+        <div id="signup-overlay" class="overlay" style="display: none">
+        {% endif %}
+        <!-- <div id="signup-overlay" class="overlay" style="padding-top: 3%;"> -->
             <div class="overlay-content">
                 <form id="signup-form" action="{{ url_for('auth.login_signup') }}" method="post">
                     <div id="signup-form-header">
