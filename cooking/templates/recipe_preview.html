@@ -11,13 +11,24 @@
         </div>
         <div id="recipe-content"> 
             <!-- TODO: Put rating here -->
-            <div id="recipe-title">
-                <a href="{{ url_for('recipe.recipe', recipe_id=recipe.id) }}">
-                    {{ recipe.title }}
-                </a>
+            <div>
+                <div id="recipe-title">
+                    <a href="{{ url_for('recipe.recipe', recipe_id=recipe.id) }}">
+                        {{ recipe.title }}
+                    </a>
+                </div>
+                <div id="recipe-user">
+                    <a href="{{ url_for('profile.get_profile', user_id=recipe.user.id) }}">
+                        {{ recipe.user.username }}
+                    </a>
+                </div>
             </div>
             <div id="recipe-description">
-                {{ recipe.description }}
+                {% if recipe.description|length > 250 %}
+                    {{ recipe.description[:250] }}...
+                {% else %}
+                    {{ recipe.description }}
+                {% endif %}
             </div>
         </div>
     </div>

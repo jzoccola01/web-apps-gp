@@ -170,3 +170,8 @@ h4 {
     /* border: 3px solid black; */
     width: 100%;
 }
+
+#recipe-description {
+    overflow-wrap: break-word;
+    max-width:800px;
+}
