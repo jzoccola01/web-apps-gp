@@ -24,8 +24,8 @@
                 </div>
             </div>
             <div id="recipe-description">
-                {% if recipe.description|length > 250 %}
-                    {{ recipe.description[:250] }}...
+                {% if recipe.description|length > 200 %}
+                    {{ recipe.description[:200] }}...
                 {% else %}
                     {{ recipe.description }}
                 {% endif %}
