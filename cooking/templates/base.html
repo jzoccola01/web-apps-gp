@@ -55,7 +55,7 @@
         <div id="login-overlay" class="overlay" style="display: none">
         {% endif %}
         <!-- <div id="login-overlay" class="overlay"> -->
-            <div class="overlay-content">
+            <div class="overlay-content" id="login-pos">
                 <form id="login-form" action="{{ url_for('auth.login_signup') }}" method="post">
                     <div id="login-form-header">
                         <h1>Log In</h1>
@@ -91,7 +91,7 @@
         <div id="signup-overlay" class="overlay" style="display: none">
         {% endif %}
         <!-- <div id="signup-overlay" class="overlay" style="padding-top: 3%;"> -->
-            <div class="overlay-content">
+            <div class="overlay-content" id="signup-pos">
                 <form id="signup-form" action="{{ url_for('auth.login_signup') }}" method="post">
                     <div id="signup-form-header">
                         <h1>Sign Up</h1>

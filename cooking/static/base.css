@@ -218,6 +218,11 @@ footer {
     height: fit-content;
     box-shadow: 0px 8px 16px 0px var(--shadow-color);
     border-radius: 15px;
+    position: fixed;
+}
+
+#signup-pos {
+    top: 20%;
 }
 
 #login-form-content {
@@ -297,4 +302,5 @@ input:focus {
     flex-direction: row;
     justify-content: center;
     margin-top: 10px;
+    color: red;
 }
