@@ -175,3 +175,9 @@ h4 {
     overflow-wrap: break-word;
     max-width:800px;
 }
+
+#recipe-info {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

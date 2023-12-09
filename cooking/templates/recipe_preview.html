@@ -17,10 +17,19 @@
                         {{ recipe.title }}
                     </a>
                 </div>
-                <div id="recipe-user">
+                <div id="recipe-info">
                     <a href="{{ url_for('profile.get_profile', user_id=recipe.user.id) }}">
                         {{ recipe.user.username }}
                     </a>
+                    {% set avg = [0] %}
+                    {% for review in recipe.ratings %}
+                        {% if avg.insert(0, avg[0] + review.rating) %}{% endif %}
+                    {% endfor %}
+                    {% if avg[0] == 0 %}
+                        Unrated
+                    {% else %} 
+                        {{ avg[0] / recipe.ratings|length }} <span style="color: var(--primary);">&#9733</span>
+                    {% endif %}
                 </div>
             </div>
             <div id="recipe-description">
