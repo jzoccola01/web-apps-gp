@@ -1,5 +1,5 @@
 import random
-from flask import Blueprint, request, redirect, url_for, flash
+from flask import Blueprint, request, redirect, url_for, flash, render_template
 from .. import db, bcrypt
 from . import model
 import flask_login
@@ -14,17 +14,25 @@ def login_signup(): # TODO: separate into two separate routes with views
     username = request.form.get("username")
     password = request.form.get("password")
 
+    query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
+    recipes = db.session.execute(query).scalars().all()
+
+    bookmarks = []
+    if flask_login.current_user.is_authenticated:
+        query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
+        bookmarks = db.session.execute(query).scalars().all()
+
     if username:
         # Check that passwords are equal
         if password != request.form.get("password_repeat"):
-            flash("Passwords were different")
-            return redirect(url_for("main.index"))
+            flash("Passwords did not match", 'auth')
+            return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search="", login=False, signup=True)
         # Check if the email is already at the database
         query = db.select(model.User).where(model.User.email == email)
         user = db.session.execute(query).scalar_one_or_none()
         if user:
-            flash("Email provided is already registered")
-            return redirect(url_for("main.index"))
+            flash("Email is already registered", 'auth')
+            return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search="", login=False, signup=True)
         salt = random.randint(0, 100000)
         password_hash = bcrypt.generate_password_hash(password + str(salt)).decode("utf-8")
         new_user = model.User(email=email, username=username, password=password_hash, salt=salt, timestamp=datetime.datetime.now())
@@ -42,8 +50,8 @@ def login_signup(): # TODO: separate into two separate routes with views
         flask_login.login_user(user)
         return redirect(url_for("main.index"))
     else:
-        flash("Invalid credentials")
-        return redirect(url_for("main.index"))
+        flash("Invalid credentials", 'auth')
+        return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search="", login=True, signup=False)
 
 @bp.route("/logout")
 def logout():

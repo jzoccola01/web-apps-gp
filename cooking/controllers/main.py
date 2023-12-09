@@ -21,7 +21,7 @@ def index():
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search="")
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search="", login=False, signup=False)
 
 
 @bp.route("/create")
@@ -72,7 +72,7 @@ def bookmark():
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
 
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search)
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search, login=False, signup=False)
 
 @bp.route('/sort', methods=["POST"])
 def sort():
@@ -105,7 +105,7 @@ def sort():
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search)
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search, login=False, signup=False)
 
 @bp.route("/filter", methods=["POST"])
 def filter():
@@ -140,7 +140,7 @@ def filter():
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search)
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search, login=False, signup=False)
 
 @bp.route("/search", methods=["POST"])
 def search():
@@ -170,7 +170,7 @@ def search():
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
 
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search=search)
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category="All", search=search, login=False, signup=False)
 
 @bp.route("/category/<string:category>", methods=["GET"])
 def category(category):
@@ -182,4 +182,4 @@ def category(category):
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category=category, search="")
+    return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort="option1", category=category, search="", login=False, signup=False)
