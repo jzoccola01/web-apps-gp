@@ -81,11 +81,9 @@
 
             <div id="lower-body">
                 {% if search != '' %}
-                    <div id="search-info">
-                        <h4>Search Results for "{{ search }}"</h4>
-                        <a href="{{ url_for('main.index') }}">
-                            Cancel
-                        </a>
+                    <div id="search-info">     
+                        <h4>"{{ search }}"</h4>
+                        <a href="{{ url_for('main.index') }}" class="text_button" style="text-decoration: none;">X</a>
                     </div>
                 {% endif %}
 
