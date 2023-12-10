@@ -149,7 +149,7 @@ ul {
     min-width: 20em;
     height: fit-content;
     align-items: left;
-    
+    overflow-wrap: break-word;
 }
 
 
