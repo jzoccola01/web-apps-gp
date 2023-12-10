@@ -22,9 +22,10 @@
                             {% if avg.insert(0, avg[0] + review.rating) %}{% endif %}
                         {% endfor %}
                         {% if avg[0] == 0 %}
-                            Unrated
+                            <span>Not Yet Rated</span>
                         {% else %} 
-                            {{ avg[0] / recipe.ratings|length }} <span style="color: var(--primary);">&#9733</span>
+                            {% set total = avg[0] / recipe.ratings|length %}
+                            <span style="color: var(--primary);"> {{ (total * 10) | round / 10 }} &#9733</span>
                         {% endif %}
                     </div>
                     <div>

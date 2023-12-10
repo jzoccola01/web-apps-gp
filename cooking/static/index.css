@@ -139,10 +139,16 @@ h4 {
     transition: .2s;
 }
 
+
+#recipe-photo{
+    height: 100px;
+}
+
 #recipe-photo img {
     width: 100px;
-    height: 100px;
+    height: 100%;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 #recipe-wrap {
