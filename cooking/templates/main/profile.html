@@ -3,22 +3,198 @@
 {% block content %}
     <!-- Profile Content -->
     <link rel="stylesheet" href="../static/profile.css">
-    <section class="profile-content">
-        <div class="user-info">
-            <div class="user-details">
-                <h2> <b>Username: {{ user.username }} </b></h2>
-                <p><b>Member of Recipe Roster since: {{ user.timestamp.strftime('%Y-%m-%d') }}</b></p>
+
+
+    <section id="profile-content">
+        <div id="user-header">
+            <div class="recipeh1" style="color: var(--primary);">{{ user.username }}</div>
+            <div>Member of Recipe Roster Since: {{ user.timestamp.strftime('%m-%d-%Y') }}</div>
+
+        </div>
+
+
+
+        <!-- ADD CONDITIONAL FOR IF USER IS NOT EQUAL TO CURRENT USER -->
+        {% if user == current_user %}
+            <div class="your-recipes">
+                <div class="recipeh1">Your Recipes</div>
+                {% if user.recipes == [] %}
+                    <div style="text-align: center;">You have No Recipes Yet</div>
+                    <a href="{{ url_for('main.create') }}" style="text-align: center;">
+                        <button class="button">Create Recipe</button>
+                    </a>
+                {% endif %}
+
+                {% if user.recipes != [] %}
+                    {% for recipe in user.recipes %}
+                        {% include 'your_recipes_preview.html' %}
+                    {% endfor %}
+                {% endif %}
             </div>
+        {% else %}
+            <div class="your-recipes">
+                <div class="recipeh1">Recipes</div>
+                {% if user.recipes == [] %}
+                    <div style="text-align: center;">This User Has No Recipes Yet</div>
+                {% endif %}
+
+                {% if user.recipes != [] %}
+                    {% for recipe in user.recipes %}
+                        {% include 'profile_recipe_preview.html' %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+
+
+
+
+        
+
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+            
+            function plusSlides(n) {
+              showSlides(slideIndex += n);
+            }
+            
+            function showSlides(n) {
+              let i;
+              let slides = document.getElementsByClassName("mySlides");
+              if (n > slides.length) {slideIndex = 1}
+              if (n < 1) {slideIndex = slides.length}
+              for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+              }
+              slides[slideIndex-1].style.display = "block";
+            }
+        </script>
+
+        {% if user == current_user %}
+            <div class="bookmarked-recipes">
+                <div class="recipeh1">Bookmarked Recipes</div>
+                {% if user.bookmarks == [] %}
+                    <div style="text-align: center;">You have No Bookmarked Recipes Yet</div>
+                    <div style="text-align: center;">Check Out Our Home Page to Get Cooking!</div>
+                    
+                {% else %}
+                    {% for b_recipe in user.bookmarks %}
+                        {% set recipe = b_recipe.recipe %}
+                        {% include 'profile_recipe_preview.html' %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+
+
+        <div class="profile-photos">
+            {% if user == current_user %}
+                <div class="recipeh1">Your Photos</div>
+            {% else %}
+                <div class="recipeh1">{{user.username}}'s Photos</div>
+            {% endif %}
+
+            <!-- Container for the image gallery -->
+            
+    
+                <!-- Full-width images with number text -->
+                {% if user.photos %}
+                    {% set total_photos = user.photos|length %}
+                    <div id="gallery-wrapper">
+                        <div class="gallery">
+                            {% for photo in user.photos %}
+                                {% if loop.index == 1 %}
+                                    <div class="mySlides" style="display: block;">
+                                        <div class="numbertext">{{ loop.index }} / {{total_photos}}</div>
+                                        <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
+                                    </div>
+                                {% else %}
+                                    <div class="mySlides">
+                                        <div class="numbertext">{{ loop.index }} / {{total_photos}}</div>
+                                        <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
+                                    </div>
+                                    <!-- <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe"> -->
+                                {% endif %}
+                            {% endfor %}
+                        
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
+                    </div>
+                {% else %}
+                <!-- Placeholder image or alternative content if no photos are available -->
+                    <div style="text-align: center;">You have Not Uploaded Any Photos Yet</div>
+                    <div style="text-align: center;">Create or Review Recipes to Upload Photos!</div>
+                    
+                {% endif %}
+               
+        
+                            
+
+
+        </div>
+        
+       
+        
+        
+
+
+
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <section class="profile-content">
+        <div class="user-info">
+                <div class="recipeh1">{{ user.username }}</div>
+                <div>Member of Recipe Roster since: {{ user.timestamp.strftime('%m-%d-%Y') }}</div>
         </div>
         
         <div class="recipes-created">
             {% if user.recipes == [] %}
-                <h3><i>You have no created recipes yet :(</i></h3>
-                <h3><i>Remember to create a recipe and share it with the community!</i></h3>
+                <div class="recipeh1">Your Recipes</div>
+                <div>You have no created recipes yet</div>
             {% endif %}
 
             {% if user.recipes != [] %}
-                <h2><b><u>Recipes You've Created</u></b></h2>
+                <div class="recipeh1">Your Recipes</div>
                 {% for recipe in user.recipes %}
                 <div class="recipe">
                     <div class="recipe-info">
@@ -40,10 +216,8 @@
             {% if user.bookmarks != [] %}
             <h2><b><u>Recipes You've Bookmarked</u></b></h2>
             {% endif %}
-            <!-- Display the user's bookmarked recipes here -->
             {% for b_recipe in user.bookmarks %}
                 <div class="recipe">
-                    <!-- We can add the recipe photo here and use some css to make it nice also-->
                     <div class="recipe-info">
                         <h4><b>Bookmarked Recipe: </b><a href="{{ url_for('recipe.recipe', recipe_id = b_recipe.recipe.id) }}">{{b_recipe.recipe.title}}</a></h4>
                         <p><b> Description: </b>{{ b_recipe.recipe.description }}</p>
@@ -68,5 +242,5 @@
             {% endif %}
         </div>
 
-    </section>
+    </section> -->
 {% endblock %}

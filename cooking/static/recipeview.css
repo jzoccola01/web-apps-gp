@@ -103,6 +103,7 @@ ul {
     border-radius: 0 3px 3px 0;
     user-select: none;
     -webkit-user-select: none;
+    transition: .3s;
 }
 
 .prev{
@@ -148,7 +149,7 @@ ul {
     min-width: 20em;
     height: fit-content;
     align-items: left;
-    
+    overflow-wrap: break-word;
 }
 
 

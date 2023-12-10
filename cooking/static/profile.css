@@ -1,8 +1,163 @@
 @import url("base.css");
 
-/* Profile Page CSS *************************************** */
+
+/***** SOURCES: ******
+         
+    Slideshow: https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp
+
+*/
+
+
+.recipeh1{
+    font-size: xx-large;
+    color: var(--secondary-variant);
+}
+
+#profile-content {
+    padding-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+
+#user-header{
+    text-align: center;
+}
+
+#user-header .recipeh1{
+    padding-bottom: 1rem;
+}
+
+.your-recipes{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 70%;
+    min-width: 700px;
+}
+
+.bookmarked-recipes{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 70%;
+    min-width: 700px;
+}
+
+.profile-photos{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 70%;
+    min-width: 700px;
+    padding-bottom: 50px;
+}
+
+
+
+
+/* photo gallery */
+#gallery-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.gallery{
+    display: flex;
+    position: relative;
+    width: 50%;
+    min-width: 20em;
+    height: fit-content;
+    background-color: lightgray;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_img {
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+  
+.mySlides {
+    display: none;  
+    height: 25em;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: .3s;
+}
+
+.prev{
+    left:0;
+}
+  
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+  
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: .5s;
+}
+  
+.numbertext {
+    color:black;
+    font-size: 20px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .recipeh1{
+    font-size: xx-large;
+    color: var(--secondary-variant);
+}
+
 .profile-content {
-    max-width: 1200px;
+    max-width: 70%;
+    min-width: 700px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -10,13 +165,6 @@
 .user-info {
     text-align: center;
     margin-bottom: 30px;
-}
-
-.user-details {
-    background-color: var(--background-overlay);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 8px 16px 0px var(--shadow-color);
 }
 
 .user-details h2 {
@@ -66,10 +214,10 @@
     border-radius: 10px;
     box-shadow: 0px 8px 16px 0px var(--shadow-color);
 }
-
+ */
 /* Media query for responsiveness */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
     .profile-content {
         padding: 10px;
     }
-}
+} */

@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="../static/profile_recipe_preview.css">
+
+<a class="recipe-card-button" href="{{ url_for('recipe.recipe', recipe_id=recipe.id) }}">
+    <div class="recipe">
+        <div id="recipe-wrap">
+            <div id="recipe-photo">
+                {% if recipe.photos %}
+                    <img src="{{ url_for('static', filename='photos/photo-' ~ recipe.photos[0].id ~ '.' ~ recipe.photos[0].file_extension) }}" alt="recipe photo">
+                {% else %}
+                    <img src="../static/logo.png" alt="recipe photo">
+                {% endif %}
+            </div>
+            <div id="recipe-content"> 
+                <!-- TODO: Put rating here -->
+                <div>
+                    <div id="recipe-title">
+                            {{ recipe.title }}
+                    </div>
+                    <div id="recipe-info">
+                        {% set avg = [0] %}
+                        {% for review in recipe.ratings %}
+                            {% if avg.insert(0, avg[0] + review.rating) %}{% endif %}
+                        {% endfor %}
+                        {% if avg[0] == 0 %}
+                            Unrated
+                        {% else %} 
+                            {{ avg[0] / recipe.ratings|length }} <span style="color: var(--primary);">&#9733</span>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if recipe.cook_time == 1 %}
+                            Cook Time: {{ recipe.cook_time }} min
+                        {% else %}
+                            Cook Time: {{ recipe.cook_time }} mins
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div id="recipe-description">
+                    {% if recipe.description|length > 200 %}
+                        {{ recipe.description[:200] }}...
+                    {% else %}
+                        {{ recipe.description }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if current_user.is_authenticated %}
+            <div id="bookmark-button">
+                <form action="{{ url_for('main.bookmark_profile') }}" method="post">
+                    <button class="button" type="submit">
+                        {% set bookmarked = [0] %}
+                        {% for bookmark in current_user.bookmarks %}
+                            {% if recipe.id == bookmark.recipe_id %}
+                                {% if bookmarked.insert(0, 1) %}{% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if bookmarked[0] == 1 %}
+                            <img src="../static/bookmark-filled.png" alt="bookmark icon" width="20px" id="bookmark">
+                        {% else %}
+                            <img src="../static/bookmark-empty.png" alt="bookmark icon" width="20px" id="bookmark">
+                        {% endif %}
+                    </button>
+                    <input type="hidden" name="profile-user-id" value="{{ user.id }}">
+                    <input type="hidden" name="recipe-id" value="{{ recipe.id }}">
+                    <input type="hidden" name="category" value="{{ category }}">
+                    <input type="hidden" name="sort" value="{{ sort }}">
+                    <input type="hidden" name="search" value="{{ search }}">
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</a>
