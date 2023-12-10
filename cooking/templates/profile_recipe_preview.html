@@ -37,7 +37,11 @@
 
                 </div>
                 <div id="recipe-description">
+                    {% if recipe.description|length > 200 %}
+                        {{ recipe.description[:200] }}...
+                    {% else %}
                         {{ recipe.description }}
+                    {% endif %}
                 </div>
             </div>
         </div>
