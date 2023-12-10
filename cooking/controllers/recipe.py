@@ -22,7 +22,7 @@ def recipe(recipe_id):
     # Query for average of reviews out of 5 stars for specific recipe
     rating_value = db.session.query(func.avg(model.Rating.rating)).where(model.Rating.recipe_id == recipe.id).scalar()
     if (type(rating_value) == float):
-        rating_value = round(rating_value * 2) / 2
+        rating_value = round(rating_value, 1)
     else:
         rating_value = "Not Yet Rated"
 
