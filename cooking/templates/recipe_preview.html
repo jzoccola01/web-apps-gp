@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="../static/index.css">
 
+
+
 <div class="recipe">
     <div id="recipe-wrap">
         <div id="recipe-photo">
@@ -13,12 +15,12 @@
             <!-- TODO: Put rating here -->
             <div>
                 <div id="recipe-title">
-                    <a href="{{ url_for('recipe.recipe', recipe_id=recipe.id) }}">
+                    <a href="{{ url_for('recipe.recipe', recipe_id=recipe.id) }}" class="text_button">
                         {{ recipe.title }}
                     </a>
                 </div>
                 <div id="recipe-info">
-                    <a href="{{ url_for('profile.get_profile', user_id=recipe.user.id) }}">
+                    <a href="{{ url_for('profile.get_profile', user_id=recipe.user.id) }}" class="text_button">
                         {{ recipe.user.username }}
                     </a>
                     {% set avg = [0] %}
@@ -28,7 +30,8 @@
                     {% if avg[0] == 0 %}
                         Unrated
                     {% else %} 
-                        {{ avg[0] / recipe.ratings|length }} <span style="color: var(--primary);">&#9733</span>
+                        {% set total = avg[0] / recipe.ratings|length %}
+                        {{ (total * 10) | round / 10 }} <span style="color: var(--primary);">&#9733</span>
                     {% endif %}
                 </div>
             </div>

@@ -1,9 +1,10 @@
 #whole-page {
     height: 100%;
     width: 100%;
-    /* border: 3px solid orange; */
     display: flex;
     flex-direction: row;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #side-bar {
@@ -12,11 +13,10 @@
     /* border: 1px solid black; */
     padding: 10px;
     background-color: var(--background-overlay);
-    border-radius: 10px;
+    border-radius: 7px;
     height: 100%;
     position: sticky;
-    top: 150px;
-    margin-left: 15px;
+    margin-top: 30px;
 }
 
 #side-bar h2 {
@@ -61,21 +61,23 @@ input[type='radio'] {
 #filter {
     background-color: var(--background-overlay-variant);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 7px;
     margin-bottom: 20px;
 }
 
 #sort {
     background-color: var(--background-overlay-variant);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 #main-body {
     display: flex;
     flex-direction: column;
     /* border: 3px solid red; */
-    width: 100%;
+    width: 85%;
+    min-width: 85%;
+    margin-right: 50px;
     padding: 10px;
 }
 
@@ -112,12 +114,209 @@ h4 {
     margin: 0;
 }
 
-/* #create-recipe {
-    border: 3px solid black;
-} */
+#create-recipe {
+    padding-top: 10px;
+}
 
 #recipe-list {
     /* border: 3px solid pink; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+
+
+
+.recipe {
+    display: flex;
+    flex-direction: row;
+    border-radius: 7px;
+    padding: 10px;
+    justify-content: space-between;
+    background-color: var(--background-overlay);
+    text-decoration: none;
+}
+
+#recipe-photo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+#recipe-wrap {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+#recipe-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+#recipe-title {
+    font-size: x-large;
+    text-decoration: none;
+}
+
+#search-info {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* border: 3px solid black; */
+    width: 100%;
+}
+
+#recipe-description {
+    overflow-wrap: break-word;
+    max-width:100%;
+}
+
+#recipe-info {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* #whole-page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#side-bar {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+    background-color: var(--background-overlay);
+    border-radius: 10px;
+    height: 100%;
+    position: sticky;
+    top: 150px;
+}
+
+#side-bar h2 {
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-text);
+    font-size: x-large;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#side-bar button {
+    margin-top: 10px;
+}
+
+#filter-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-item label {
+    font-size: large;
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-text);
+    padding: 5px;
+}
+
+input[type='radio'] {
+    accent-color: black;
+}
+
+#sort-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#filter {
+    background-color: var(--background-overlay-variant);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#sort {
+    background-color: var(--background-overlay-variant);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#main-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+}
+
+#upper-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 99%;
+    padding: 10px;
+}
+
+#lower-body {
+    display: flex;
+    flex-direction: column;
+    width: 99%;
+    padding: 10px;
+}
+
+#title {
+    font-size: xx-large;
+    font-family: 'Roboto', sans-serif;
+    color: var(--primary);
+}
+
+h4 {
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+#title h1 {
+    margin: 0;
+}
+
+
+#recipe-list {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -167,17 +366,16 @@ h4 {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    /* border: 3px solid black; */
     width: 100%;
 }
 
 #recipe-description {
     overflow-wrap: break-word;
-    max-width:800px;
+    max-width:100%;
 }
 
 #recipe-info {
     display: flex;
     flex-direction: row;
     gap: 5px;
-}
+} */

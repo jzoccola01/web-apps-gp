@@ -2,7 +2,10 @@
 
 {% block content %}
     <link rel="stylesheet" href="../../static/index.css">
-    
+
+
+
+
     <container id="whole-page">
         <div id="side-bar">
             <div id="filter">
@@ -107,5 +110,121 @@
             </div>
         </div>
     </container>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+    
+    <container id="whole-page">
+        <div id="side-bar">
+            <div id="filter">
+                <h2>Filter</h2>
+                <form action="{{ url_for('main.filter') }}" id="filter-form" method="POST">
+                    <div class="list-item">
+                        <input id="none" class="input" type="radio" name="filter" value="All" required>
+                        <label for="none">All</label>
+                    </div>
+
+                    <div class="list-item">
+                        <input class="input" type="radio" id="breakfast" name="filter" value="Breakfast" required>
+                        <label for="breakfast">Breakfast</label>
+                    </div>
+                    
+                    <div class="list-item">
+                        <input class="input" type="radio" id="lunch" name="filter" value="Lunch" required>
+                        <label for="lunch">Lunch</label>
+                    </div>
+                    
+                    <div class="list-item">
+                        <input class="input" type="radio" id="dinner" name="filter" value="Dinner" required>
+                        <label for="dinner">Dinner</label>
+                    </div>
+
+                    <input type="hidden" name="sort" value="{{ sort }}">
+                    <input type="hidden" name="search" value="{{ search }}">
+
+                    <button class="button" type="submit">Apply!</button>
+                </form>
+            </div>
+
+            <div id="sort">
+                <h2>Sort</h2>
+                <form action="{{ url_for('main.sort') }}" id="sort-form" method="POST">
+                    <div class="list-item">
+                        <input id="rating" class="input" type="radio" name="sort" value="option1" required>
+                        <label for="rating">Highest Rating</label>
+                    </div>
+                    
+                    <div class="list-item">
+                        <input id="reviews" class="input" type="radio" name="sort" value="option2" required>
+                        <label for="reviews">Most Reviewed</label>
+                    </div>
+                    
+                    <div class="list-item">
+                        <input id="recent" class="input" type="radio" name="sort" value="option3" required>
+                        <label for="recent">Most Recent</label>
+                    </div>
+
+                    <input type="hidden" name="category" value="{{ category }}">
+                    <input type="hidden" name="search" value="{{ search }}">
+
+                    <button class="button" type="submit">Apply!</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="main-body">
+            <div id="upper-body">
+                <div id="title">
+                    <h1>Recipes</h1>
+                </div>
+
+                {% if current_user.is_authenticated %}
+                    <div id="create-recipe">
+                        <a href="{{ url_for('main.create') }}">
+                            <button class="button">Create Recipe</button>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div id="lower-body">
+                {% if search != '' %}
+                    <div id="search-info">
+                        <h4>Search Results for "{{ search }}"</h4>
+                        <a href="{{ url_for('main.index') }}">
+                            Cancel
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if category != 'All' %}
+                    <h4>Filtered by {{ category }}</h4>
+                {% endif %}
+
+                {% if sort == 'option1' %}
+                    <h4>Sorted by Highest Rating</h4>
+                {% elif sort == 'option2' %}
+                    <h4>Sorted by Most Reviewed</h4>
+                {% elif sort == 'option3' %}
+                    <h4>Sorted by Most Recent</h4>
+                {% endif %}
+                <div id="recipe-list">
+                    {% for recipe in recipes %}
+                        {% if category == 'All' or recipe.category == category %}
+                            {% include 'recipe_preview.html' %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </container> -->
 
 {% endblock %}

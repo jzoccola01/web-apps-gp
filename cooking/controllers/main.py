@@ -72,6 +72,7 @@ def bookmark():
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
         bookmarks = db.session.execute(query).scalars().all()
 
+    # return redirect(url_for("main.index", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search, login=False, signup=False))
     return render_template("main/index.html", recipes=recipes, bookmarks=bookmarks, sort=sort_op, category=category, search=search, login=False, signup=False)
 
 @bp.route("/bookmark_profile", methods=["POST"])
@@ -88,36 +89,6 @@ def bookmark_profile():
         new_bookmark = model.Bookmark(user_id=user_id, recipe_id=recipe_id)
         db.session.add(new_bookmark)
     db.session.commit()
-
-    category = request.form.get("category")
-    sort_op = request.form.get("sort")
-    search = request.form.get("search")
-
-    new_recipes = []
-    if sort_op == "option1":
-        # Query to order by the average rating of each recipe
-        query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
-        new_recipes = db.session.execute(query).scalars().all()
-
-    elif sort_op == "option2":
-        # Query to get the number of ratings for each recipe and order by that
-        query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.count(model.Rating.rating).desc())
-        new_recipes = db.session.execute(query).scalars().all()
-    elif sort_op == "option3":
-        # Query to order by the timestamp of each recipe
-        query = db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
-        new_recipes = db.session.execute(query).scalars().all()
-
-    if search == "":
-        recipes = new_recipes
-    else:
-        recipes = [r for r in new_recipes if search.lower() in r.title.lower() or search.lower() in r.description.lower() or search.lower() in r.category.lower() or search.lower() in r.user.username.lower() or any(search.lower() in i.ingredient.name.lower() for i in r.quantified_ingredients)]
-
-    bookmarks = []
-    if flask_login.current_user.is_authenticated:
-        query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
-        bookmarks = db.session.execute(query).scalars().all()
-
 
     return redirect(url_for("profile.get_profile", user_id = profile_user_id))
 
