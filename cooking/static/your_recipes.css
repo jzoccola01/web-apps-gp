@@ -1,0 +1,60 @@
+@import url("base.css");
+
+.recipe-card-button{
+    text-decoration: none;
+    border-radius: 5px;
+    transition: .2s;
+}
+.recipe-card-button:hover{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 10px;
+    transition: .2s;
+}
+
+
+#recipe-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.recipe {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    padding: 10px;
+    justify-content: space-between;
+    background-color: var(--background-overlay);
+    gap: 1em;
+}
+
+#recipe-photo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+}
+
+#recipe-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+#recipe-title {
+    font-size: x-large;
+    color: var(--primary);
+    margin: 0;
+
+}
+
+#recipe-description {
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+#recipe-info {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
