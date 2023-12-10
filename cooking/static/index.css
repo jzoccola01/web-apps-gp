@@ -10,12 +10,12 @@
 #side-bar {
     display: flex;
     flex-direction: column;
-    /* border: 1px solid black; */
     padding: 10px;
     background-color: var(--background-overlay);
     border-radius: 7px;
     height: 100%;
     position: sticky;
+    top: 150px;
     margin-top: 30px;
 }
 
@@ -39,7 +39,6 @@
 .list-item {
     display: flex;
     flex-direction: row;
-    /* border: 3px solid green;     */
 }
 
 .list-item label {
@@ -74,7 +73,6 @@ input[type='radio'] {
 #main-body {
     display: flex;
     flex-direction: column;
-    /* border: 3px solid red; */
     width: 85%;
     min-width: 85%;
     margin-right: 50px;
@@ -85,7 +83,6 @@ input[type='radio'] {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* border: 3px solid blue; */
     width: 99%;
     padding: 10px;
 }
@@ -93,13 +90,11 @@ input[type='radio'] {
 #lower-body {
     display: flex;
     flex-direction: column;
-    /* border: 3px solid green; */
     width: 99%;
     padding: 10px;
 }
 
 #title {
-    /* border: 3px solid black; */
     font-size: xx-large;
     font-family: 'Roboto', sans-serif;
     color: var(--primary);
@@ -119,7 +114,6 @@ h4 {
 }
 
 #recipe-list {
-    /* border: 3px solid pink; */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -174,7 +168,6 @@ h4 {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    /* border: 3px solid black; */
     width: 100%;
 }
 
