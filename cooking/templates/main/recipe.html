@@ -39,8 +39,12 @@
     
                 <div class="recipeh2" style="padding-top: .5em;">
                     <span>Rating: </span>
-                    <span style="color: var(--primary);">{{rating_value}} &#9733</span>
-                    <a href="#reviews" class="text_button">(reviews)</a>
+                    {% if recipe.ratings == [] %}
+                        <span style="color: var(--primary);">{{rating_value}}</span>
+                    {% else %}
+                        <span style="color: var(--primary);">{{rating_value}} &#9733</span>
+                        <a href="#reviews" class="text_button">(reviews)</a>
+                    {% endif %}
                 </div>
                 
     
@@ -296,8 +300,11 @@
 
 
 
-
-            <div style="width: 40%; padding-top: 2em;">{% include 'ratings_template.html' %}</div>
+            {% if recipe.ratings == [] %}
+                <div style="padding-top: 2em;">No Reviews Yet</div>
+            {% else %}
+                <div style="width: 40%; padding-top: 2em;">{% include 'ratings_template.html' %}</div>
+            {% endif %}
 
         </section>
     </section>
