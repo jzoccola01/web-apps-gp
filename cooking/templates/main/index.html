@@ -67,11 +67,13 @@
                     <h1>Recipes</h1>
                 </div>
 
-                <div id="create-recipe">
-                    <a href="{{ url_for('main.create') }}">
-                        <button class="button">Create Recipe</button>
-                    </a>
-                </div>
+                {% if current_user.is_authenticated %}
+                    <div id="create-recipe">
+                        <a href="{{ url_for('main.create') }}">
+                            <button class="button">Create Recipe</button>
+                        </a>
+                    </div>
+                {% endif %}
             </div>
 
             <div id="lower-body">
