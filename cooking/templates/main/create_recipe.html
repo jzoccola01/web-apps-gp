@@ -36,7 +36,14 @@
                         <div id="ingredient-list">
                             <div>
                                 <label>Ingredient:</label>
-                                <input class="ingredient_input" type="text" name="ingredient1" required/>
+                                <input class="ingredient_input" list="ingredients" name="ingredient1" required/>
+
+                                <datalist id="ingredients">
+                                    {% for ingredient in ingredients %}
+                                        <option value="{{ ingredient.name }}">
+                                    {% endfor %}
+                                </datalist>
+
                                 <label for="quantity">Quantity</label>
                                 <input class="selector-int" style="width: 2.5em;" type="number" id="quantity" name="quantity1" min="0" step="any" required>
                                 <label for="unit">Unit</label>

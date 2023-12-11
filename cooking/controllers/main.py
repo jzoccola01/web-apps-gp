@@ -27,7 +27,11 @@ def index():
 @bp.route("/create")
 @flask_login.login_required
 def create():
-    return render_template("main/create_recipe.html")
+
+    query = db.select(model.Ingredient).order_by(model.Ingredient.name)
+    ingredients = db.session.execute(query).scalars().all()
+
+    return render_template("main/create_recipe.html", ingredients=ingredients)
 
 @bp.route("/bookmark", methods=["POST"])
 @flask_login.login_required
