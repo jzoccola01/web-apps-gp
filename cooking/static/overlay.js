@@ -4,6 +4,7 @@ function loginOverlayOn() {
 }
   
 function loginOverlayOff() {
+    document.getElementById("login-form").reset();
     document.getElementById("login-overlay").style.display = "none";
 }
 
@@ -13,5 +14,6 @@ function signUpOverlayOn() {
 }
   
 function signUpOverlayOff() {
+    document.getElementById("signup-form").reset();
     document.getElementById("signup-overlay").style.display = "none";
 }
