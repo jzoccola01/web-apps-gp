@@ -73,6 +73,8 @@ A basic web application for viewing and creating recipes. Detailed functionality
     - Users can delete their existing reviews
 - [x] Login/Signup Overlay
     - Login and signup are handled in a modal overlay using JavaScript
+- [x] JavaScript for Recipe Creation
+    - Used to dynamically add and remove ingredients and steps
 - [x] Brilliant UI
     - The UI is beautiful and intuitive
     - The UI is responsive
