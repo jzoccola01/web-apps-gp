@@ -7,7 +7,7 @@ function addIngredient() {
             <label>Ingredient:</label>
             <input class="ingredient_input" type="text" name="ingredient` + ingredientCount + `" required/>
             <label for="quantity">Quantity</label>
-            <input class="selector-int" style="width: 2.5em;" type="number" id="quantity" name="quantity` + ingredientCount + `" required>
+            <input class="selector-int" style="width: 2.5em;" type="number" id="quantity" step="0.125" min="0" name="quantity` + ingredientCount + `" required>
             <label for="unit">Unit</label>
             <input class="ingredient_input" style="width: 5em;" type="text" name="unit` + ingredientCount + `" required>
     `;
