@@ -9,7 +9,7 @@ import datetime
 bp = Blueprint("auth", __name__)
 
 @bp.route("/", methods=["POST"])
-def login_signup(): # TODO: separate into two separate routes with views
+def login_signup():
     email = request.form.get("email")
     username = request.form.get("username")
     password = request.form.get("password")

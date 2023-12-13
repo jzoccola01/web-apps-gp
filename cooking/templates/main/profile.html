@@ -99,7 +99,6 @@
 
             <!-- Container for the image gallery -->
             
-    
                 <!-- Full-width images with number text -->
                 {% if user.photos %}
                     {% set total_photos = user.photos|length %}
@@ -116,7 +115,6 @@
                                         <div class="numbertext">{{ loop.index }} / {{total_photos}}</div>
                                         <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
                                     </div>
-                                    <!-- <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe"> -->
                                 {% endif %}
                             {% endfor %}
                         
@@ -130,117 +128,7 @@
                     <div style="text-align: center;">Create or Review Recipes to Upload Photos!</div>
                     
                 {% endif %}
-               
-        
-                            
-
-
         </div>
-        
-       
-        
-        
-
-
-
-
-
-
-
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- <section class="profile-content">
-        <div class="user-info">
-                <div class="recipeh1">{{ user.username }}</div>
-                <div>Member of Recipe Roster since: {{ user.timestamp.strftime('%m-%d-%Y') }}</div>
-        </div>
-        
-        <div class="recipes-created">
-            {% if user.recipes == [] %}
-                <div class="recipeh1">Your Recipes</div>
-                <div>You have no created recipes yet</div>
-            {% endif %}
-
-            {% if user.recipes != [] %}
-                <div class="recipeh1">Your Recipes</div>
-                {% for recipe in user.recipes %}
-                <div class="recipe">
-                    <div class="recipe-info">
-                        <h4><b> Recipe: </b><a href="{{ url_for('recipe.recipe', recipe_id = recipe.id) }}">{{recipe.title}}</a></h4>
-                        <p><b> Description: </b>{{ recipe.description }}</p>
-                        <p><b> Cook Time: </b>: {{ recipe.cook_time }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-            {% endif %}
-        </div>
-
-        <div class="bookmarked-recipes">
-            {% if user.bookmarks == [] %}
-                <h3><i>You have no bookmarked recipes yet :(</i></h3>
-                <h3><i>Once you bookmark a recipe it will appear here.</i></h3>
-            {% endif %}
-
-            {% if user.bookmarks != [] %}
-            <h2><b><u>Recipes You've Bookmarked</u></b></h2>
-            {% endif %}
-            {% for b_recipe in user.bookmarks %}
-                <div class="recipe">
-                    <div class="recipe-info">
-                        <h4><b>Bookmarked Recipe: </b><a href="{{ url_for('recipe.recipe', recipe_id = b_recipe.recipe.id) }}">{{b_recipe.recipe.title}}</a></h4>
-                        <p><b> Description: </b>{{ b_recipe.recipe.description }}</p>
-                        <p><b> Cook Time: </b>: {{ b_recipe.recipe.cook_time }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        <div class="user-photos">
-            {% if user.photos == [] %}
-                <h3><i>You have no uploaded photos yet :(</i></h3>
-                <h3><i>Remember to upload a photo with recipes you post!</i></h3>
-                <h3><i>Once you upload a photo with your recipe it will appear here.</i></h3>
-            {% endif %}
-
-            {% if user.photos != [] %}
-                <h2><b><u>Photo's you've uploaded to Recipe Roster</u></b></h2>
-                {% for photo in user.photos %}
-                    <img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
-                {% endfor %}
-            {% endif %}
-        </div>
-
-    </section> -->
 {% endblock %}

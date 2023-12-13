@@ -2,7 +2,6 @@ var ingredientCount = 1;
 function addIngredient() {
     ingredientCount++;
     var newIngredient = document.createElement("div");
-    // newIngredient.setAttribute("class", "ingredient-quantity");
     newIngredient.innerHTML = ` 
             <label>Ingredient:</label>
             <input class="ingredient_input" type="text" name="ingredient` + ingredientCount + `" required/>

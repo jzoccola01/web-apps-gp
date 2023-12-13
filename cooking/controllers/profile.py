@@ -4,8 +4,6 @@ from .. import db
 
 bp = Blueprint("profile", __name__)
 
-# TODO: Add flask_login's @login_required decorator here
-# TODO: Ensure that a single user cannot enter a bookmark for the same recipe twice.
 @bp.route('/profile/<int:user_id>')
 def get_profile(user_id):
     user = db.session.get(model.User, user_id)

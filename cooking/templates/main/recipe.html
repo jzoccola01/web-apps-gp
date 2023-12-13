@@ -114,7 +114,6 @@
                                 <div class="numbertext">{{ loop.index }} / {{total_photos}}</div>
                                 <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe">
                             </div>
-                            <!-- <img class="main_img" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="User uploaded image of recipe"> -->
                         {% endif %}
                     {% endfor %}
                 
@@ -295,8 +294,6 @@
                 </div>
                 {% endif %}
             </div>
-
-
 
 
 

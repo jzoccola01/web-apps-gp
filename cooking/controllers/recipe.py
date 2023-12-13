@@ -131,6 +131,7 @@ def edit_rating():
     return redirect(url_for("recipe.recipe", recipe_id = recipe_id))
 
 
+### DELETE CURRENT USER'S RATING ###
 @bp.route("/delete_rating", methods=["POST"])
 def delete_rating():
     previous_rating_id = request.form.get("previous_rating_id")
