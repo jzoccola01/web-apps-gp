@@ -168,26 +168,16 @@ def filter():
 @bp.route("/search", methods=["POST"])
 def search():
     search = request.form.get("search")
-    sort_op = request.form.get("sort")
+    sort_op = "option1"
     category = request.form.get("category")
 
     new_recipes = []
-    if sort_op == "option1":
-        # Query to order by the average rating of each recipe
-        query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
-        new_recipes = db.session.execute(query).scalars().all()
-
-    elif sort_op == "option2":
-        # Query to get the number of ratings for each recipe and order by that
-        query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.count(model.Rating.rating).desc())
-        new_recipes = db.session.execute(query).scalars().all()
-    elif sort_op == "option3":
-        # Query to order by the timestamp of each recipe
-        query = db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
-        new_recipes = db.session.execute(query).scalars().all()
+    # Query to order by the average rating of each recipe
+    query = db.select(model.Recipe).join(model.Rating, isouter=True).group_by(model.Recipe.id).order_by(db.func.avg(model.Rating.rating).desc())
+    new_recipes = db.session.execute(query).scalars().all()
 
     recipes = [r for r in new_recipes if search.lower() in r.title.lower() or search.lower() in r.description.lower() or search.lower() in r.category.lower() or search.lower() in r.user.username.lower() or any(search.lower() in i.ingredient.name.lower() for i in r.quantified_ingredients)]
-
+    
     bookmarks = []
     if flask_login.current_user.is_authenticated:
         query = db.select(model.Bookmark).where(model.Bookmark.user_id == flask_login.current_user.id)
